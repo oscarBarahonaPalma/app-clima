@@ -1,0 +1,187 @@
+.menu ul {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  list-style: none;
+  padding: 0;
+  margin: 0.5rem 0;
+  position: relative;
+  top: 10px;
+  
+}
+
+/* Estilos base para enlaces del menú */
+.menu li a {
+  text-decoration: none;
+  color: #ffffff;
+  font-size: 1rem;
+  font-weight: 600;
+  transition: color 0.3s ease;
+  background: transparent;
+}
+
+/* Fuerza colores consistentes en todos los estados */
+.menu li a:visited { color: #ffffff; }
+.menu li a:active { color: #ffffff; background: transparent; }
+.menu li a:focus { color: #ffffff; outline: none; }
+
+/* Hover: mantener azul si está activo; si no, no cambiar */
+.menu li a:hover { 
+  color: inherit; 
+}
+
+/* Estado activo: siempre azul */
+.menu li a.activo,
+.menu li a.activo:hover,
+.menu li a.activo:focus,
+.menu li a.activo:active,
+.menu li a.activo:visited { 
+  color: #007bff !important; 
+  background: transparent !important;
+}
+
+/* Forzar color consistente en todos los estados para evitar que cambie a #212121 */
+/* Excluir enlaces activos para permitir color de “seleccionado” */
+.menu li a:not(.activo),
+.menu li a:not(.activo):link,
+.menu li a:not(.activo):visited,
+.menu li a:not(.activo):active,
+.menu li a:not(.activo):focus {
+  color: #ffffff !important;
+  background: transparent !important;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* 💻 Escritorio: menú horizontal a la derecha */
+@media (min-width: 1281px) {
+  .menu ul {
+    display: flex;
+    justify-content: flex-end;
+    gap: 3rem;
+    padding: 0;
+    margin: 0.2rem 90px 0 0;
+    position: relative;
+    bottom: 15px;
+    color: white;
+  }
+
+  .menu { position: static; }
+
+  .menu li a { 
+    font-size: 1.2rem; 
+    font-weight: bold; 
+  }
+
+  .menu li a:hover { 
+    color: inherit; 
+  }
+
+  /* Ocultar botón de cerrar en pantallas grandes */
+  .menu-close-btn {
+    display: none !important;
+  }
+}
+
+/* 📱 Móvil: menú vertical fullscreen (todo ancho y alto) */
+@media (max-width: 1280px) {
+  /* Hacer las reglas más específicas para evitar conflictos */
+  .header .menu,
+  .header.collapse .menu {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    width: 300px !important;
+    height: 100vh !important;
+    display: none !important;
+    background: #212121 !important;
+    z-index: 999 !important; /* Muy alto para estar por encima de todo */
+    overflow-y: hidden !important;
+    -webkit-overflow-scrolling: touch !important;
+    transform: translateX(-100%) !important;
+    transition: transform 300ms ease !important;
+  }
+
+  .header .menu.open,
+  .header.collapse .menu.open { 
+    display: block !important; 
+    transform: translateX(0) !important; 
+  }
+
+  /* Botón de cerrar del menú */
+  .menu-close-btn {
+    position: absolute !important;
+    top: 1rem !important;
+    right: 1rem !important;
+    background: transparent !important;
+    border: none !important;
+    cursor: pointer !important;
+    z-index: 1000 !important;
+    padding: 0.8rem 1.2rem !important;
+    border-radius: 8px !important;
+    transition: all 0.3s ease !important;
+    color: pink !important;
+    font-size: 0.7rem !important;
+    font-weight: 700 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 1px !important;
+  }
+
+  .menu-close-btn:hover {
+    background: rgba(255, 0, 0, 0.1) !important;
+    transform: scale(1.1) !important;
+  }
+
+  .header .menu ul,
+  .header.collapse .menu.open ul {
+    margin: 0 !important; /* Sin margen superior */
+    padding: 2rem !important;
+    padding-top: 4rem !important; /* Mucho más espacio arriba para bajar las opciones */
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: stretch !important;
+    justify-content: flex-start !important; /* Alinear al inicio del contenedor */
+    gap: 1.5rem !important;
+    width: 100% !important;
+    height: auto !important; /* Ajustar altura al contenido */
+    /* Forzar expansión completa */
+    flex: 1 1 100% !important;
+    align-self: stretch !important;
+    /* Asegurar que no haya márgenes que limiten el ancho */
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    padding-left: 2rem !important;
+    padding-right: 2rem !important;
+    padding-bottom: 2rem !important; /* Espacio en la parte inferior */
+    box-sizing: border-box !important;
+    /* Bloquear scroll - no se puede deslizar */
+    overflow-y: hidden !important;
+  }
+
+  .header .menu li,
+  .header.collapse .menu li { 
+    width: 100% !important; 
+    /* Asegurar que cada elemento se expanda */
+    flex: 0 0 auto !important;
+  }
+
+  .header .menu li a,
+  .header.collapse .menu li a {
+    display: block !important;
+    width: 100% !important;
+    padding: 1.2rem 1rem !important;
+    border-radius: 12px !important;
+    font-size: 1.2rem !important;
+    text-align: left !important;
+    transition: all 0.3s ease !important;
+    box-sizing: border-box !important;
+  }
+
+  .header .menu li a:hover,
+  .header.collapse .menu li a:hover {
+    background: rgba(255,255,255,0.15) !important;
+    border-color: rgba(255,255,255,0.2) !important;
+    transform: translateX(10px) !important;
+  }
+}

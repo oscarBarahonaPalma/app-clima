@@ -1,0 +1,164 @@
+/* 🧱 Header principal (glass, sticky) */
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 200; /* por encima del drawer */
+  display: grid;
+  grid-template-columns: auto 1fr auto; /* logo | search | hamburger */
+  column-gap: 1rem; /* separación consistente entre logo, buscador y hamburguesa */
+  align-items: center;
+  min-height: 72px;
+  padding: 0.5rem 1rem;
+  box-sizing: border-box;
+  width: 100%;
+  margin: 0;
+  background: rgba(255, 255, 255, 0.06);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(255,255,255,0.12);
+}
+
+/* 🧭 Zona del buscador dentro del header */
+#header-search,
+.padre {
+  display: flex;
+  align-items: center;
+  min-width: 200px;
+  max-width: clamp(360px, 50vw, 820px);
+  margin: 0; /* usaremos column-gap del grid para separar */
+  height: 100%;
+}
+
+@media (min-width: 1400px) {
+  #header-search,
+  .padre {
+    max-width: 900px;
+  }
+}
+
+/* 🖥️ Escritorio grande: layout original y sin hamburguesa */
+@media (min-width: 1281px) {
+  .hamburger { display: none !important; }
+  .menu { position: static !important; display: block !important; }
+}
+
+/* Tablet/medianas: mostrar hamburguesa y permitir colapso */
+@media (max-width: 1280px) {
+  #header-search,
+  .padre {
+
+  /* Evitar que el header cree un "containing block" para elementos fixed en pantallas pequeñas.
+     Algunas propiedades como `backdrop-filter`/`filter` hacen que los elementos `position: fixed`
+     se posicionen respecto al header en vez del viewport, impidiendo que el drawer cubra 100vh.
+     Desactivamos el filtro en dispositivos pequeños para que el menú fijo pueda ocupar toda la pantalla. */
+  .header {
+    -webkit-backdrop-filter: none !important;
+    backdrop-filter: none !important;
+  }
+    flex: 1 1 200px;
+    min-width: 160px;
+    max-width: 100%;
+  }
+  /* Mostrar botón hamburguesa también en tablets */
+  .hamburger { display: inline-flex; align-items: center; justify-content: center; }
+}
+
+/* Móvil: el header hace wrap y el buscador ocupa una fila completa debajo */
+@media (max-width: 768px) {
+  .header { grid-template-columns: auto 1fr auto; }
+  .hamburger { display: inline-flex; align-items: center; justify-content: center; }
+  /* Ocultar buscador del header en móvil para usar el buscador-movil dentro del contenido */
+  #header-search,
+  .padre { display: none; }
+}
+
+/* Forzar colapso cuando no hay espacio suficiente */
+.header.collapse .hamburger { display: inline-flex; align-items: center; justify-content: center; }
+.header.collapse .menu { display: none; }
+/* El menú móvil se maneja desde Menu.css, no forzar display aquí */
+
+/* 🔍 Formulario de búsqueda */
+.buscador-form {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  padding: 6px 10px;
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  box-sizing: border-box;
+  border: none;
+  outline: none;
+}
+
+/* 🍔 Botón hamburguesa */
+.hamburger {
+  display: none;
+  width: 36px;
+  height: 36px;
+  padding: 6px;
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 8px;
+  background: rgba(255,255,255,0.08);
+  cursor: pointer;
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  color: #fff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  justify-self: end; /* pega a la derecha en la grilla */
+  margin-right: -0.5rem; /* empuja hacia la esquina */
+}
+
+/* 🧠 Input */
+.buscador-form input {
+  flex: 1;
+  padding: 6px 8px;
+  border: none;
+  outline: none;
+  background: transparent;
+  font-size: 0.9rem;
+  color: #333;
+  font-family: 'Segoe UI', sans-serif;
+}
+.buscador-form input::placeholder {
+  color: rgba(0, 0, 0, 0.5);
+}
+
+/* 🔘 Botón */
+.buscador-form button {
+  background: #5c9df1;
+  border: none;
+  padding: 6px 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.1s;
+  font-size: 0.9rem;
+}
+.buscador-form button:hover {
+  background: #4285f4;
+}
+.buscador-form button:active {
+  transform: scale(0.95);
+}
+
+/* 🧼 Extra: quitar líneas verdes si existieran */
+body, header, #header-search, .buscador-form {
+  border: none !important;
+  outline: none !important;
+}
+
+/* 📱 Responsive para móviles */
+@media (max-width: 480px) {
+  #header-search {
+    max-width: 100%;
+    margin: 0 0.5rem;
+  }
+
+  .buscador-form button {
+    font-size: 0.8rem;
+    padding: 5px 8px;
+  }
+}

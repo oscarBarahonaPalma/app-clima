@@ -1,0 +1,544 @@
+/* ----------------------------
+   ClimaActual.css
+---------------------------- */
+
+/* 🌤️ Tarjeta Clima */
+.tarjeta-clima {
+  width: 100%;
+  max-width: 100%;
+  padding: 20px;
+  border-radius: 20px;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+  box-sizing: border-box;
+  text-align: center;
+  font-family: 'Segoe UI', sans-serif;
+  line-height: 1.4;
+  overflow: hidden;
+  transition: background 0.5s ease;
+  
+
+  /* Variables de fondo por defecto */
+  --bg-start: #ffffff;
+  --bg-end:   #f0f0f0;
+  background: linear-gradient(135deg, var(--bg-start), var(--bg-end));
+  background-size: 200% 200%;
+}
+
+/* 🔍 Buscador móvil por encima de la tarjeta de ciudad */
+.buscador-movil { display: none; }
+
+@media (max-width: 768px) {
+  .buscador-movil {
+    display: block;
+    width: 100%;
+    max-width: 640px;
+    margin: 0.5rem auto 0.75rem;
+    padding: 0 1rem;
+    box-sizing: border-box;
+  }
+}
+
+/* 📱 Responsive completo para pantallas pequeñas */
+@media (max-width: 767px) {
+  .tarjeta-clima {
+    padding: 15px;
+    border-radius: 15px;
+    min-height: 250px;
+  }
+  
+  .tc-temp {
+    font-size: 2rem;
+    margin: 6px 0;
+  }
+  
+  .tc-icon {
+    font-size: 1.5rem;
+  }
+  
+  .tc-location {
+    font-size: 1rem;
+  }
+  
+  .tc-datetime {
+    font-size: 0.75rem;
+  }
+  
+  .tc-desc {
+    font-size: 0.9rem;
+  }
+  
+  .buscador-movil {
+    margin: 0.25rem auto 0.5rem;
+    padding: 0 0.75rem;
+  }
+}
+
+/* 📱 Responsive para móviles muy pequeños */
+@media (max-width: 480px) {
+  .tarjeta-clima {
+    padding: 12px;
+    border-radius: 12px;
+    min-height: 200px;
+  }
+  
+  .tc-temp {
+    font-size: 1.8rem;
+    margin: 5px 0;
+  }
+  
+  .tc-icon {
+    font-size: 1.3rem;
+  }
+  
+  .tc-location {
+    font-size: 0.9rem;
+  }
+  
+  .tc-datetime {
+    font-size: 0.7rem;
+  }
+  
+  .tc-desc {
+    font-size: 0.8rem;
+  }
+  
+  .buscador-movil {
+    margin: 0.2rem auto 0.4rem;
+    padding: 0 0.5rem;
+  }
+}
+
+/* 📱 Responsive para tablets */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .tarjeta-clima {
+    padding: 18px;
+    border-radius: 18px;
+    min-height: 280px;
+  }
+  
+  .tc-temp {
+    font-size: 2.2rem;
+  }
+  
+  .tc-icon {
+    font-size: 1.8rem;
+  }
+}
+
+/* 📱 Responsive para pantallas muy pequeñas */
+@media (max-width: 360px) {
+  .tarjeta-clima {
+    padding: 10px;
+    border-radius: 10px;
+    min-height: 180px;
+  }
+  
+  .tc-temp {
+    font-size: 1.6rem;
+    margin: 4px 0;
+  }
+  
+  .tc-icon {
+    font-size: 1.2rem;
+  }
+  
+  .tc-location {
+    font-size: 0.8rem;
+  }
+  
+  .tc-datetime {
+    font-size: 0.65rem;
+  }
+  
+  .tc-desc {
+    font-size: 0.75rem;
+  }
+  
+  .buscador-movil {
+    margin: 0.15rem auto 0.3rem;
+    padding: 0 0.4rem;
+  }
+}
+
+/* efecto glass para la tarjeta */
+.clima-actual .tarjeta-clima {
+  background: linear-gradient(135deg, rgba(255,255,255,0.15), rgba(255,255,255,0.08));
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,255,255,0.25);
+  min-height: 300px;
+}
+
+
+/* 🎨 Variantes por clima */
+.tarjeta-clima.clear {
+  background: linear-gradient(135deg, #FFC947, #FF6B6B);
+}
+.tarjeta-clima.clouds {
+  background: linear-gradient(135deg, #4E5D6C, #2C3E50);
+  color: #ddd;
+}
+.tarjeta-clima.rain,
+.tarjeta-clima.drizzle {
+  background: linear-gradient(135deg, #667db6, #0082c8);
+}
+.tarjeta-clima.thunderstorm {
+  background: linear-gradient(135deg, #141E30, #243B55);
+}
+.tarjeta-clima.snow {
+  background: linear-gradient(135deg, #E0EAFc, #CFDEF3);
+  color: #333;
+}
+
+/* 🧱 Estructura interna */
+.tc-header {
+  text-align: center;
+}
+.tc-location {
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+.tc-datetime {
+  font-size: 0.8rem;
+  opacity: 0.8;
+}
+
+.tc-main {
+  text-align: center;
+}
+.tc-icon {
+  font-size: 2rem;
+}
+.tc-temp {
+  font-size: 2.5rem;
+  margin: 8px 0;
+}
+.tc-desc {
+  text-transform: capitalize;
+  opacity: 0.9;
+}
+
+/* 📊 Métricas */
+.tc-metrics {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-top: 1rem;
+}
+.metric {
+  background: rgba(255,255,255,0.15);
+  backdrop-filter: blur(8px);
+  border-radius: 12px;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.85rem;
+}
+.m-icon {
+  font-size: 1.3rem;
+}
+
+/* 🦶 Footer */
+.tc-footer {
+  text-align: center;
+  font-size: 0.75rem;
+  opacity: 0.9;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+  margin-top: 1rem;
+}
+.tc-footer .dot {
+  width: 8px;
+  height: 8px;
+  background: white;
+  border-radius: 50%;
+  opacity: 0.9;
+}
+
+/* 🧱 Contenedor de top row (en ClimaActual.jsx) */
+.tc-top-row {
+  display: flex;
+  width: 100%;
+}
+
+/* Otros elementos opcionales */
+
+.clima-actual {
+  width: 100%;
+  max-width: 1200px; /* o el ancho que prefieras */
+  margin: 0 auto;
+  padding: 1rem;
+  box-sizing: border-box;
+}
+
+/* Layout de dos columnas en pantallas grandes */
+@media (min-width: 1024px) {
+  .clima-actual {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    gap: 2rem;
+    align-items: stretch;
+    min-height: 400px;
+  }
+  
+  .clima-actual .tarjeta-clima {
+    margin-bottom: 0;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+  
+  .clima-actual .por-hora {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+}
+
+/* Responsive tarjetas */
+@media (min-width: 768px) {
+  .tc-metrics { grid-template-columns: repeat(4, 1fr); }
+}
+
+/* 📱 Pantallas pequeñas - Tarjeta azul más ancha */
+@media (max-width: 767px) {
+  .clima-actual {
+    padding: 0.25rem;
+  }
+  
+  .tarjeta-clima {
+    width: 100%;
+    max-width: none;
+    margin: 0 0 1rem 0;
+    padding: 1.75rem;
+  }
+}
+
+/* 🌧️ Efectos de clima animados */
+.efectos-clima {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+  overflow: hidden;
+}
+
+/* 💧 Gotas de lluvia */
+.rain-drop {
+  position: absolute;
+  width: 2px;
+  height: 20px;
+  background: linear-gradient(to bottom, transparent, rgba(255, 255, 255, 0.8));
+  border-radius: 0 0 50% 50%;
+  animation: rain-fall linear infinite;
+  opacity: 0.7;
+}
+
+@keyframes rain-fall {
+  0% {
+    transform: translateY(-100vh) translateX(0);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.7;
+  }
+  90% {
+    opacity: 0.7;
+  }
+  100% {
+    transform: translateY(100vh) translateX(20px);
+    opacity: 0;
+  }
+}
+
+/* ⚡ Rayos */
+.lightning {
+  position: absolute;
+  width: 3px;
+  height: 100vh;
+  background: linear-gradient(to bottom, 
+    transparent 0%, 
+    rgba(255, 255, 255, 0.1) 20%, 
+    rgba(255, 255, 255, 0.9) 50%, 
+    rgba(255, 255, 255, 0.1) 80%, 
+    transparent 100%);
+  animation: lightning-flash 4s ease-in-out infinite;
+  opacity: 0;
+}
+
+@keyframes lightning-flash {
+  0%, 95% {
+    opacity: 0;
+  }
+  5%, 10% {
+    opacity: 1;
+  }
+  15% {
+    opacity: 0;
+  }
+  20%, 25% {
+    opacity: 0.8;
+  }
+  30% {
+    opacity: 0;
+  }
+}
+
+/* ☀️ Rayos de sol */
+.sun-ray {
+  position: absolute;
+  width: 100px;
+  height: 3px;
+  background: linear-gradient(90deg, 
+    transparent, 
+    rgba(255, 255, 0, 0.8), 
+    rgba(255, 255, 0, 0.4), 
+    transparent);
+  animation: sun-shine 3s ease-in-out infinite;
+  opacity: 0;
+}
+
+@keyframes sun-shine {
+  0%, 100% {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.2);
+  }
+}
+
+/* 🌤️ Efectos específicos por clima */
+.layout.rainy .rain-drop {
+  animation-duration: 0.8s;
+}
+
+.layout.stormy .rain-drop {
+  animation-duration: 0.6s;
+}
+
+.layout.stormy .lightning {
+  animation-duration: 3s;
+}
+
+.layout.sunny .sun-ray {
+  animation-duration: 4s;
+}
+
+/* 🌟 Partículas flotantes */
+.particle {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.6);
+  border-radius: 50%;
+  animation: float 6s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0) translateX(0);
+    opacity: 0;
+  }
+  25% {
+    opacity: 0.6;
+  }
+  50% {
+    transform: translateY(-20px) translateX(10px);
+    opacity: 0.8;
+  }
+  75% {
+    opacity: 0.6;
+  }
+}
+
+/* 🌊 Burbujas flotantes */
+.floating-element {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  animation: bubble-float 8s ease-in-out infinite;
+}
+
+@keyframes bubble-float {
+  0%, 100% {
+    transform: translateY(100vh) translateX(0);
+    opacity: 0;
+  }
+  20% {
+    opacity: 0.3;
+  }
+  50% {
+    transform: translateY(50vh) translateX(30px);
+    opacity: 0.6;
+  }
+  80% {
+    opacity: 0.3;
+  }
+}
+
+/* 🎨 Efectos adicionales para tormenta */
+.layout.stormy::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at 50% 50%, 
+    rgba(0, 0, 0, 0.1) 0%, 
+    transparent 70%);
+  animation: storm-pulse 2s ease-in-out infinite;
+  pointer-events: none;
+  z-index: 0;
+}
+
+@keyframes storm-pulse {
+  0%, 100% {
+    opacity: 0.1;
+  }
+  50% {
+    opacity: 0.3;
+  }
+}
+
+/* ☀️ Efectos adicionales para sol */
+.layout.sunny::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at 20% 20%, 
+    rgba(255, 255, 0, 0.1) 0%, 
+    transparent 50%);
+  animation: sun-glow 5s ease-in-out infinite;
+  pointer-events: none;
+  z-index: 0;
+}
+
+@keyframes sun-glow {
+  0%, 100% {
+    opacity: 0.1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.2;
+    transform: scale(1.1);
+  }
+}

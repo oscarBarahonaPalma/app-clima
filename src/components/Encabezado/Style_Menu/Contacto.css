@@ -1,0 +1,163 @@
+.contenido{
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+ 
+}
+
+/* Estructura y texto principal */
+.contenido{
+    gap: 1.25rem;
+    min-height: calc(100vh - 160px);
+    padding: 2rem 1rem;
+    color: #f5f7fb;
+}
+
+.contenido h2{
+    margin: 0;
+    font-size: clamp(1.4rem, 2.2vw, 1.8rem);
+    font-weight: 800;
+    letter-spacing: 0.3px;
+    color: #ffffff;
+}
+
+.contenido p{
+    margin-top: 0.35rem;
+    margin-bottom: 0.5rem;
+    color: #007bff;
+    font-size: clamp(0.95rem, 1.6vw, 1.05rem);
+    font-weight: 700;
+    line-height: 1.55;
+}
+
+/* Tarjeta del formulario */
+.contenido form{
+    width: 100%;
+    background: #212121;
+    border: 1px solid #2b2b2b;
+    border-radius: 16px;
+    padding: 1.25rem 1.25rem;
+    color: #000000;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.25);
+}
+
+/* Texto negro dentro de la tarjeta */
+.contenido form label{
+    color: #ffffff;
+}
+
+.contenido label{
+    color: #dfe7ff;
+    font-weight: 600;
+    font-size: 0.95rem;
+    margin-bottom: 0.35rem;
+}
+
+/* Campos */
+.contenido form input,
+.contenido form textarea{
+    width: 100%;
+    color: #000000;
+    background: #ffffff;
+    border: 1px solid #d0d0d0;
+    border-radius: 10px;
+    padding: 0.75rem 0.9rem;
+    outline: none;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+
+.contenido form input::placeholder,
+.contenido form textarea::placeholder{
+    color: #666666;
+}
+
+.contenido form input:focus,
+.contenido form textarea:focus{
+    border-color: #007bff;
+    box-shadow: 0 0 0 3px rgba(0,123,255,0.25);
+    background: #ffffff;
+}
+
+.contenido textarea{
+    resize: vertical;
+    min-height: 130px;
+}
+
+/* Mensajes */
+.contenido span{
+    display: block;
+    font-weight: 600;
+}
+
+/* Botón */
+.contenido button{
+    appearance: none;
+    border: none;
+    border-radius: 12px;
+    padding: 0.85rem 1rem;
+    font-weight: 700;
+    color: #0b1b33;
+    background: linear-gradient(135deg, #6ec1ff 0%, #007bff 100%);
+    cursor: pointer;
+    transition: transform 0.06s ease, filter 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: 0 8px 20px rgba(0,123,255,0.35);
+}
+
+.contenido button:hover{
+    filter: brightness(1.05);
+}
+
+.contenido button:active{
+    transform: translateY(1px);
+}
+
+.contenido button:disabled{
+    cursor: not-allowed;
+    opacity: 0.7;
+    box-shadow: none;
+    filter: saturate(0.8);
+}
+
+/* Responsive */
+@media (max-width: 480px){
+    .contenido{
+        padding: 1.25rem 1rem;
+    }
+    .contenido form{
+        padding: 1rem;
+        border-radius: 14px;
+    }
+}
+
+/* Desktop: ampliar el ancho máximo del formulario */
+@media (min-width: 1281px){
+    .contenido{
+        display: grid;
+        grid-template-columns: minmax(420px, 1fr) minmax(420px, 1fr);
+        gap: 3rem;
+        align-items: start;
+    }
+    /* Formulario a la izquierda */
+    .contenido form{
+        max-width: 720px !important;
+        grid-column: 1;
+        grid-row: 1 / span 2;
+        justify-self: start;
+    }
+    /* Título y descripción a la derecha */
+    .contenido h2{
+        grid-column: 2;
+        grid-row: 1;
+        text-align: center;
+        justify-self: center;
+    }
+    .contenido p{
+        grid-column: 2;
+        grid-row: 2;
+        text-align: center;
+        justify-self: center;
+        margin-top: 0.5rem;
+    }
+}

@@ -1,0 +1,54 @@
+.cuerpo {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  padding: 1rem;
+  box-sizing: border-box;
+}
+
+/* Contenido: en columna por defecto (móviles) */
+.cuerpo__contenido {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Contenedor del pronóstico semanal */
+.semana_oscar {
+  margin-top: 1.5rem;
+}
+
+/* Para pantallas grandes */
+@media (min-width: 1080px) {
+  .cuerpo {
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem;
+  }
+
+  .cuerpo__contenido {
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    padding: 0 1rem;
+  }
+
+  .solo-celular,
+  .solo-escritorio {
+    flex: 1;
+    height: 100%;
+    box-sizing: border-box;
+  }
+
+  .semana_oscar {
+    width: 100%;
+    max-width: 1200px;
+    margin-top: 2rem;
+  }
+}
+

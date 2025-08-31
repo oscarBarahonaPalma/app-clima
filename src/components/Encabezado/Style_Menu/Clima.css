@@ -1,0 +1,397 @@
+.clima_menu{
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+  background-size: 400% 400%;
+  /* Fondo fijo igual al del resto de secciones */
+  background: linear-gradient(135deg, #56CCF2, #F2C94C);
+  position: relative;
+  overflow-x: hidden;
+  overflow-y: auto;
+  z-index: 0;
+  gap: 0;
+}
+
+/* Fondos (unificados): usar siempre el mismo degradado */
+.clima_menu.sunny,
+.clima_menu.cloudy,
+.clima_menu.rainy,
+.clima_menu.stormy {
+  background: linear-gradient(135deg, #56CCF2, #F2C94C);
+}
+
+/* Animación suave del fondo */
+.clima_menu,
+.clima_menu.sunny,
+.clima_menu.cloudy,
+.clima_menu.rainy,
+.clima_menu.stormy {
+  animation: bgShift 15s ease infinite;
+}
+
+/* Capas temáticas día/noche y tono cálido/frío */
+.clima_menu.day::after,
+.clima_menu.night::after,
+.clima_menu.warm::before,
+.clima_menu.cool::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+/* Día: luz suave */
+.clima_menu.day::after {
+  background: radial-gradient(1200px 600px at 20% 10%, rgba(255,255,255,0.25), transparent 60%);
+}
+
+/* Noche: viñeta oscura y brillo tenue */
+.clima_menu.night::after {
+  background:
+    radial-gradient(800px 400px at 80% 10%, rgba(255,255,255,0.08), transparent 60%),
+    rgba(0, 10, 20, 0.45);
+}
+
+/* Cálido: tinte dorado sutil */
+.clima_menu.warm::before {
+  background: linear-gradient(180deg, rgba(242, 201, 76, 0.18), transparent 60%);
+}
+
+/* Frío: tinte azulado sutil */
+.clima_menu.cool::before {
+  background: linear-gradient(180deg, rgba(86, 204, 242, 0.18), transparent 60%);
+}
+
+@keyframes bgShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* 🌧️ Efectos de clima animados */
+.efectos-clima-clima {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+  overflow: hidden;
+}
+
+/* Pronóstico por hora en el menú clima */
+.pronostico-hora-clima {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0.5rem auto;
+  padding: 0 1rem;
+  box-sizing: border-box;
+  order: 1;
+}
+
+/* Pronóstico semanal en el menú clima */
+.clima_menu .semana {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0.5rem auto;
+  padding: 0 1rem;
+  box-sizing: border-box;
+  order: 2;
+}
+
+/* 🖥️ Solo en pantallas grandes - Layout horizontal */
+@media (min-width: 1024px) {
+  .clima_menu {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 2rem;
+  }
+  
+  .pronostico-hora-clima {
+    flex: 0 0 600px;
+    order: 1;
+  }
+  
+  .clima_menu .semana {
+    flex: 0 0 400px;
+    margin-left: auto;
+    order: 2;
+  }
+}
+
+/* Responsive para el pronóstico por hora */
+@media (max-width: 768px) {
+  .pronostico-hora-clima {
+    margin: 1rem auto;
+    padding: 0 0.5rem;
+  }
+}
+
+/* 📱 Responsive completo para pantallas pequeñas */
+@media (max-width: 767px) {
+  .clima_menu {
+    padding-top: 4rem;
+    min-height: 100vh;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+  }
+  
+  .pronostico-hora-clima {
+    margin: 0.5rem auto;
+    padding: 0 0.25rem;
+    order: 1;
+  }
+  
+  .clima_menu .semana {
+    margin: 0.5rem auto;
+    padding: 0 0.25rem;
+    order: 2;
+  }
+}
+
+/* 📱 Responsive para móviles muy pequeños */
+@media (max-width: 480px) {
+  .clima_menu {
+    padding-top: 3rem;
+    min-height: 100vh;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+  }
+  
+  .pronostico-hora-clima {
+    margin: 0.25rem auto;
+    padding: 0 0.125rem;
+  }
+  
+  .clima_menu .semana {
+    margin: 0.25rem auto;
+    padding: 0 0.125rem;
+  }
+}
+
+/* 📱 Responsive para tablets */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .clima_menu {
+    padding-top: 4rem;
+    min-height: 100vh;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+  }
+  
+  .pronostico-hora-clima {
+    margin: 1.5rem auto;
+    padding: 0 0.75rem;
+    order: 1;
+  }
+  
+  .clima_menu .semana {
+    margin: 1.5rem auto;
+    padding: 0 0.75rem;
+    order: 2;
+  }
+}
+
+/* 💧 Gotas de lluvia */
+.rain-drop-clima {
+  position: absolute;
+  width: 2px;
+  height: 20px;
+  background: linear-gradient(to bottom, transparent, rgba(255, 255, 255, 0.8));
+  border-radius: 0 0 50% 50%;
+  animation: rain-fall linear infinite;
+  opacity: 0.7;
+}
+
+@keyframes rain-fall {
+  0% {
+    transform: translateY(-100vh) translateX(0);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.7;
+  }
+  90% {
+    opacity: 0.7;
+  }
+  100% {
+    transform: translateY(100vh) translateX(20px);
+    opacity: 0;
+  }
+}
+
+/* ⚡ Rayos */
+.lightning-clima {
+  position: absolute;
+  width: 3px;
+  height: 100vh;
+  background: linear-gradient(to bottom, 
+    transparent 0%, 
+    rgba(255, 255, 255, 0.1) 20%, 
+    rgba(255, 255, 255, 0.9) 50%, 
+    rgba(255, 255, 255, 0.1) 80%, 
+    transparent 100%);
+  animation: lightning-flash 4s ease-in-out infinite;
+  opacity: 0;
+}
+
+@keyframes lightning-flash {
+  0%, 95% {
+    opacity: 0;
+  }
+  5%, 10% {
+    opacity: 1;
+  }
+  15% {
+    opacity: 0;
+  }
+  20%, 25% {
+    opacity: 0.8;
+  }
+  30% {
+    opacity: 0;
+  }
+}
+
+/* ☀️ Rayos de sol */
+.sun-ray-clima {
+  position: absolute;
+  width: 100px;
+  height: 3px;
+  background: linear-gradient(90deg, 
+    transparent, 
+    rgba(255, 255, 0, 0.8), 
+    rgba(255, 255, 0, 0.4), 
+    transparent);
+  animation: sun-shine 3s ease-in-out infinite;
+  opacity: 0;
+}
+
+@keyframes sun-shine {
+  0%, 100% {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.2);
+  }
+}
+
+/* 🌟 Partículas flotantes */
+.particle-clima {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.6);
+  border-radius: 50%;
+  animation: float 6s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0) translateX(0);
+    opacity: 0;
+  }
+  25% {
+    opacity: 0.6;
+  }
+  50% {
+    transform: translateY(-20px) translateX(10px);
+    opacity: 0.8;
+  }
+  75% {
+    opacity: 0.6;
+  }
+}
+
+/* 🌊 Burbujas flotantes */
+.floating-element-clima {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  animation: bubble-float 8s ease-in-out infinite;
+}
+
+@keyframes bubble-float {
+  0%, 100% {
+    transform: translateY(100vh) translateX(0);
+    opacity: 0;
+  }
+  20% {
+    opacity: 0.3;
+  }
+  50% {
+    transform: translateY(50vh) translateX(30px);
+    opacity: 0.6;
+  }
+  80% {
+    opacity: 0.3;
+  }
+}
+
+/* 🎨 Efectos adicionales para tormenta */
+.clima_menu.stormy::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at 50% 50%, 
+    rgba(0, 0, 0, 0.1) 0%, 
+    transparent 70%);
+  animation: storm-pulse 2s ease-in-out infinite;
+  pointer-events: none;
+  z-index: 0;
+}
+
+@keyframes storm-pulse {
+  0%, 100% {
+    opacity: 0.1;
+  }
+  50% {
+    opacity: 0.3;
+  }
+}
+
+/* ☀️ Efectos adicionales para sol */
+.clima_menu.sunny::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at 20% 20%, 
+    rgba(255, 255, 0, 0.1) 0%, 
+    transparent 50%);
+  animation: sun-glow 5s ease-in-out infinite;
+  pointer-events: none;
+  z-index: 0;
+}
+
+@keyframes sun-glow {
+  0%, 100% {
+    opacity: 0.1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.2;
+    transform: scale(1.1);
+  }
+}
+.clima{
+   
+}

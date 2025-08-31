@@ -1,0 +1,99 @@
+html, body, #root {
+  min-height: 100vh;
+  width: 100%;
+  margin: 0 !important;
+  padding: 0 !important;
+  font-family: Arial, sans-serif;
+  box-sizing: border-box;
+}
+
+/* Reset adicional para asegurar que no haya padding */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow-x: hidden;
+}
+/* Conservas tu layout original */
+
+/* ----------------------------
+   Estilos de fondo por clima
+---------------------------- */
+.layout {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  min-height: 100vh;
+  background-size: 400% 400%;
+  /* Fondo por defecto igual al de Clima/Inicio (sunny) */
+  background: linear-gradient(135deg, #56CCF2, #F2C94C);
+  position: relative;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.main-content{
+  flex: 1; /* empuja el footer al fondo */
+  display: flex;
+  flex-direction: column;
+}
+
+/* Fondos dinámicos por clima */
+/* Fondo fijo para todas las condiciones: mismo degradado que Contacto */
+.layout.sunny,
+.layout.cloudy,
+.layout.rainy,
+.layout.stormy {
+  background: linear-gradient(135deg, #56CCF2, #F2C94C);
+}
+
+/* Animación suave del fondo */
+.layout,
+.layout.sunny,
+.layout.cloudy,
+.layout.rainy,
+.layout.stormy {
+  animation: bgShift 15s ease infinite;
+}
+
+/* Capas temáticas día/noche y tono cálido/frío - DESHABILITADAS */
+/* .layout.day::after,
+.layout.night::after,
+.layout.warm::before,
+.layout.cool::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+/* Día: luz suave */
+.layout.day::after {
+  background: radial-gradient(1200px 600px at 20% 10%, rgba(255,255,255,0.25), transparent 60%);
+}
+
+/* Noche: viñeta oscura y brillo tenue */
+.layout.night::after {
+  background:
+    radial-gradient(800px 400px at 80% 10%, rgba(255,255,255,0.08), transparent 60%),
+    rgba(0, 10, 20, 0.45);
+}
+
+/* Cálido: tinte dorado sutil */
+.layout.warm::before {
+  background: linear-gradient(180deg, rgba(242, 201, 76, 0.18), transparent 60%);
+}
+
+/* Frío: tinte azulado sutil */
+.layout.cool::before {
+  background: linear-gradient(180deg, rgba(86, 204, 242, 0.18), transparent 60%);
+} */
+
+@keyframes bgShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}

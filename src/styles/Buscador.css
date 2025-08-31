@@ -1,0 +1,71 @@
+/* Contenedor del buscador dentro del header o del cuerpo */
+.padre {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 0 1rem;
+  box-sizing: border-box;
+}
+
+/* 🔍 Formulario de búsqueda */
+.buscador-form {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  min-width: 220px;
+  max-width: 100%;
+  padding: 8px 12px;
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+  box-sizing: border-box;
+  overflow: hidden; /* evita que el botón salga del contenedor al encoger */
+}
+
+/* 🧠 Input */
+.buscador-form input {
+  flex: 1 1 auto; /* permite que el input reduzca primero antes de expulsar el botón */
+  padding: 6px 8px;
+  border: none;
+  outline: none;
+  background: transparent;
+  font-size: 0.9rem;
+  color: #333;
+  font-family: 'Segoe UI', sans-serif;
+}
+.buscador-form input::placeholder {
+  color: rgba(0, 0, 0, 0.5);
+}
+
+/* 🔘 Botón */
+.buscador-form button {
+  background: #2F80ED; /* azul cielo vivo */
+  border: none;
+  padding: 6px 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.1s;
+  font-size: 0.9rem;
+  flex-shrink: 0; /* no se comprime, evita desbordes raros */
+}
+.buscador-form button:hover {
+  background: #56CCF2; /* celeste */
+}
+.buscador-form button:active {
+  transform: scale(0.95);
+}
+
+/* 🧼 Extra: quitar líneas verdes si existieran */
+body, .buscador-form { border: none !important; outline: none !important; }
+
+/* 📱 Responsive para móviles */
+@media (max-width: 480px) {
+  .padre { max-width: 100%; padding: 0 0.5rem; }
+  .buscador-form { padding: 6px 8px; }
+  .buscador-form input { font-size: 0.85rem; }
+  .buscador-form button { font-size: 0.85rem; padding: 6px 8px; }
+}

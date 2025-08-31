@@ -1,0 +1,13 @@
+.clima {
+  display: block;
+  width: clamp(120px, 22vw, 220px);
+  height: auto;
+  margin: 0;
+}
+
+/* Tablet */
+@media (min-width: 768px) { }
+
+/* Escritorio grande */
+@media (min-width: 1080px) { }
+
