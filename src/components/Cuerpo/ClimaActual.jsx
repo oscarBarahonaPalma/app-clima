@@ -95,7 +95,7 @@ const traducirClima = (main, icon) => {
   }
 };
 
-export default function ClimaActual() {
+export default function ClimaActual({ onWeatherDataChange }) {
   const location = useLocation();
   const navigate = useNavigate();
   const params = new URLSearchParams(location.search);
@@ -103,6 +103,7 @@ export default function ClimaActual() {
   const [city, setCity] = useState(initialCity);
   const [weather, setWeather] = useState(null);
   const [hourlyData, setHourlyData] = useState([]);
+  const [forecastData, setForecastData] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
@@ -124,6 +125,7 @@ export default function ClimaActual() {
         const respF = await fetch(urlF);
         if (!respF.ok) throw new Error(`Forecast: ${respF.status} ${respF.statusText}`);
         const dataF = await respF.json();
+        setForecastData(dataF);
         setHourlyData(dataF.list.slice(0, 8));
       } catch (err) {
         setError(err.message);
@@ -172,6 +174,13 @@ export default function ClimaActual() {
       }
     }
   }, [weather]);
+
+  // Pasar datos al componente padre para el pronóstico semanal
+  useEffect(() => {
+    if (onWeatherDataChange && (weather || forecastData)) {
+      onWeatherDataChange({ weather, forecastData });
+    }
+  }, [weather, forecastData, onWeatherDataChange]);
 
   return (
     <>
