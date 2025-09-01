@@ -99,16 +99,20 @@ export default function ClimaActual({ onWeatherDataChange }) {
   const location = useLocation();
   const navigate = useNavigate();
   const params = new URLSearchParams(location.search);
-  const initialCity = params.get('city') || 'Cancún';
-  const [city, setCity] = useState(initialCity);
+  const [city, setCity] = useState('Detectando ubicación...');
   const [weather, setWeather] = useState(null);
   const [hourlyData, setHourlyData] = useState([]);
   const [forecastData, setForecastData] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [locationDetected, setLocationDetected] = useState(false);
 
   // Fetch de datos
   useEffect(() => {
+    if (!locationDetected || city === 'Detectando ubicación...') {
+      return; // No hacer fetch hasta que la ubicación esté detectada
+    }
+
     async function fetchData() {
       setLoading(true);
       setError(null);
@@ -136,15 +140,79 @@ export default function ClimaActual({ onWeatherDataChange }) {
       }
     }
     fetchData();
-  }, [city]);
+  }, [city, locationDetected]);
+
+  // Detectar ubicación automáticamente
+  useEffect(() => {
+    const detectLocation = async () => {
+      // Si hay una ciudad en la URL, usarla
+      const qCity = new URLSearchParams(location.search).get('city');
+      if (qCity) {
+        setCity(qCity);
+        setLocationDetected(true);
+        return;
+      }
+
+      // Si no hay ciudad en URL, detectar ubicación automáticamente
+      if (navigator.geolocation) {
+        try {
+          setLoading(true);
+          setCity('Detectando ubicación...');
+          
+          const position = await new Promise((resolve, reject) => {
+            navigator.geolocation.getCurrentPosition(resolve, reject, {
+              enableHighAccuracy: true,
+              timeout: 10000,
+              maximumAge: 300000 // 5 minutos
+            });
+          });
+
+          const { latitude, longitude } = position.coords;
+          
+          // Obtener nombre de la ciudad usando coordenadas
+          const apiKey = import.meta.env.VITE_OPENWEATHER_API_KEY;
+          const reverseGeocodeUrl = `https://api.openweathermap.org/geo/1.0/reverse?lat=${latitude}&lon=${longitude}&limit=1&appid=${apiKey}`;
+          
+          const response = await fetch(reverseGeocodeUrl);
+          if (response.ok) {
+            const data = await response.json();
+            if (data.length > 0) {
+              const detectedCity = data[0].name;
+              setCity(detectedCity);
+              setLocationDetected(true);
+            } else {
+              setCity('Cancún'); // Fallback
+              setLocationDetected(true);
+            }
+          } else {
+            setCity('Cancún'); // Fallback
+            setLocationDetected(true);
+          }
+        } catch (error) {
+          console.log('Error detecting location:', error);
+          setCity('Cancún'); // Fallback
+          setLocationDetected(true);
+        } finally {
+          setLoading(false);
+        }
+      } else {
+        // Si no hay geolocalización disponible
+        setCity('Cancún');
+        setLocationDetected(true);
+      }
+    };
+
+    detectLocation();
+  }, [location.search]);
 
   // Sync city when query param changes
   useEffect(() => {
     const qCity = new URLSearchParams(location.search).get('city');
     if (qCity && qCity !== city) {
       setCity(qCity);
+      setLocationDetected(true);
     }
-  }, [location.search]);
+  }, [location.search, city]);
 
   // Aplica clase dinámica a .layout
   useEffect(() => {
