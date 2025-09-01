@@ -7,16 +7,19 @@ import '../../styles/ClimaActual.css';
 // Componente de la tarjeta de clima
 function WeatherCard({ weather, updatedAt }) {
   const clima = weather.weather[0].main.toLowerCase();
+  const icon = weather.weather[0].icon;
+  const isNight = icon && icon.includes('n');
+  
   const iconos = {
-    clear: '☀️',
-    clouds: '☁️',
+    clear: isNight ? '🌙' : '☀️',
+    clouds: isNight ? '☁️' : '☁️',
     rain: '🌧️',
     drizzle: '🌧️',
     thunderstorm: '⛈️',
     snow: '❄️',
   };
   const textos = {
-    clear: 'Soleado',
+    clear: isNight ? 'Despejado' : 'Soleado',
     clouds: 'Nublado',
     rain: 'Lluvioso',
     drizzle: 'Llovizna',
