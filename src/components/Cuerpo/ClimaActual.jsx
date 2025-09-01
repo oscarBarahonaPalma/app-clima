@@ -39,7 +39,7 @@ function WeatherCard({ weather, updatedAt }) {
   return (
     <div className={`tarjeta-clima ${clima} ${isNight ? 'night' : ''}`}>
       <header className="tc-header">
-        <p className="tc-location">📍 {weather.name}</p>
+        <p className="tc-location">📍 {weather.name}, {weather.sys.country}</p>
         <p className="tc-datetime">{`${fecha}, ${hora}`}</p>
       </header>
 
@@ -119,16 +119,21 @@ export default function ClimaActual({ onWeatherDataChange }) {
       try {
         const apiKey = import.meta.env.VITE_OPENWEATHER_API_KEY;
 
-        const urlNow = `https://api.openweathermap.org/data/2.5/weather?q=${encodeURIComponent(city)}&units=metric&lang=es&appid=${apiKey}`;
-        const respNow = await fetch(urlNow);
-        if (!respNow.ok) throw new Error(`Now: ${respNow.status} ${respNow.statusText}`);
-        const dataNow = await respNow.json();
-        setWeather(dataNow);
+        // Ejecutar ambas llamadas en paralelo para mayor velocidad
+        const [respNow, respF] = await Promise.all([
+          fetch(`https://api.openweathermap.org/data/2.5/weather?q=${encodeURIComponent(city)}&units=metric&lang=es&appid=${apiKey}`),
+          fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${encodeURIComponent(city)}&units=metric&lang=es&appid=${apiKey}`)
+        ]);
 
-        const urlF = `https://api.openweathermap.org/data/2.5/forecast?q=${encodeURIComponent(city)}&units=metric&lang=es&appid=${apiKey}`;
-        const respF = await fetch(urlF);
+        if (!respNow.ok) throw new Error(`Now: ${respNow.status} ${respNow.statusText}`);
         if (!respF.ok) throw new Error(`Forecast: ${respF.status} ${respF.statusText}`);
-        const dataF = await respF.json();
+
+        const [dataNow, dataF] = await Promise.all([
+          respNow.json(),
+          respF.json()
+        ]);
+
+        setWeather(dataNow);
         setForecastData(dataF);
         setHourlyData(dataF.list.slice(0, 8));
       } catch (err) {
@@ -311,7 +316,6 @@ export default function ClimaActual({ onWeatherDataChange }) {
 
       {/* Contenido */}
       <div className="clima-actual">
-        {loading && <p>Cargando… ⏳</p>}
         {error && <p className="error">¡Ups!: {error}</p>}
         {weather && (
           <>
