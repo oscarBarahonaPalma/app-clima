@@ -188,6 +188,74 @@
   transform: scale(1.01);
 }
 
+/* NOCHE - Temas por condición para contenedor */
+.por-hora.clear-night .bg-grad-1 { 
+  background: linear-gradient(145deg, rgba(44,62,80,0.35), rgba(52,73,94,0.2)); 
+  box-shadow: 
+    0 8px 25px rgba(44, 62, 80, 0.25),
+    0 4px 15px rgba(44, 62, 80, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  transform: scale(1.02);
+}
+.por-hora.clear-night .bg-grad-2 { 
+  background: linear-gradient(145deg, rgba(44,62,80,0.2), rgba(52,73,94,0.15)); 
+  box-shadow: 
+    inset 0 1px 0 rgba(255, 255, 255, 0.2),
+    0 2px 8px rgba(44, 62, 80, 0.2);
+  transform: scale(1.01);
+}
+
+.por-hora.cloudy-night .bg-grad-1 { 
+  background: linear-gradient(145deg, rgba(52,73,94,0.12), rgba(44,62,80,0.08)); 
+  box-shadow: 
+    0 20px 60px rgba(44, 62, 80, 0.25),
+    0 12px 40px rgba(44, 62, 80, 0.18),
+    0 6px 20px rgba(44, 62, 80, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.25);
+  transform: scale(1.02);
+}
+.por-hora.cloudy-night .bg-grad-2 { 
+  background: linear-gradient(145deg, rgba(255,255,255,0.03), rgba(0,0,0,0.08)); 
+  box-shadow: 
+    inset 0 1px 0 rgba(255, 255, 255, 0.15),
+    0 4px 12px rgba(44, 62, 80, 0.1);
+  transform: scale(1.01);
+}
+
+.por-hora.rainy-night .bg-grad-1 { 
+  background: linear-gradient(145deg, rgba(44,62,80,0.12), rgba(52,73,94,0.08)); 
+  box-shadow: 
+    0 20px 60px rgba(44, 62, 80, 0.25),
+    0 12px 40px rgba(44, 62, 80, 0.18),
+    0 6px 20px rgba(44, 62, 80, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  transform: scale(1.02);
+}
+.por-hora.rainy-night .bg-grad-2 { 
+  background: linear-gradient(145deg, rgba(0,0,0,0.08), rgba(255,255,255,0.02)); 
+  box-shadow: 
+    inset 0 1px 0 rgba(255, 255, 255, 0.15),
+    0 4px 12px rgba(44, 62, 80, 0.1);
+  transform: scale(1.01);
+}
+
+.por-hora.stormy-night .bg-grad-1 { 
+  background: linear-gradient(145deg, rgba(26,26,46,0.12), rgba(22,33,62,0.08)); 
+  box-shadow: 
+    0 20px 60px rgba(22, 33, 62, 0.25),
+    0 12px 40px rgba(22, 33, 62, 0.18),
+    0 6px 20px rgba(22, 33, 62, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15);
+  transform: scale(1.02);
+}
+.por-hora.stormy-night .bg-grad-2 { 
+  background: linear-gradient(145deg, rgba(0,0,0,0.08), rgba(255,255,255,0.01)); 
+  box-shadow: 
+    inset 0 1px 0 rgba(255, 255, 255, 0.1),
+    0 4px 12px rgba(22, 33, 62, 0.1);
+  transform: scale(1.01);
+}
+
 .contenido-superpuesto { 
   position: relative; 
   z-index: 10; 
@@ -316,6 +384,7 @@
 }
 .icon-24 { width: 20px; height: 20px; }
 .amarillo { color: #FFD166; }
+.azul { color: #3498db; }
 .gris { color: #D0D7DF; }
 
 /* Estados por tarjeta según condición */
@@ -375,6 +444,59 @@
 .icono-hora.sunny .icon-24 { animation: subtle-pulse 4s ease-in-out infinite; }
 .icono-hora.rainy .icon-24 { opacity: 0.9; }
 .icono-hora.cloudy .icon-24 { opacity: 0.95; }
+
+/* NOCHE - Estados por tarjeta según condición */
+.tarjeta-hora.clear-night { 
+  background: rgba(255, 255, 255, 0.98) !important; 
+  border-color: rgba(52, 73, 94, 0.3); 
+  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none !important;
+}
+.tarjeta-hora.clear-night .icono-hora { color: #3498db; }
+.tarjeta-hora.clear-night .hora-texto, .tarjeta-hora.clear-night .temp-texto { color: #2c3e50; }
+.tarjeta-hora.clear-night:hover { 
+  background: rgba(52, 73, 94, 0.1); 
+  box-shadow: 0 10px 20px rgba(52, 73, 94, 0.2); 
+}
+
+.tarjeta-hora.cloudy-night { 
+  background: rgba(255, 255, 255, 0.98) !important; 
+  border-color: rgba(44, 62, 80, 0.3); 
+  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none !important;
+}
+.tarjeta-hora.cloudy-night .icono-hora { color: #D0D7DF; }
+.tarjeta-hora.cloudy-night .hora-texto, .tarjeta-hora.cloudy-night .temp-texto { color: #2c3e50; }
+.tarjeta-hora.cloudy-night:hover { 
+  background: rgba(44, 62, 80, 0.1); 
+  box-shadow: 0 10px 20px rgba(44, 62, 80, 0.2); 
+}
+
+.tarjeta-hora.rainy-night { 
+  background: rgba(255, 255, 255, 0.98) !important; 
+  border-color: rgba(44, 62, 80, 0.3); 
+  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none !important;
+}
+.tarjeta-hora.rainy-night .icono-hora { color: #B8C1C8; }
+.tarjeta-hora.rainy-night .hora-texto, .tarjeta-hora.rainy-night .temp-texto { color: #2c3e50; }
+.tarjeta-hora.rainy-night:hover { 
+  background: rgba(44, 62, 80, 0.1); 
+  box-shadow: 0 10px 20px rgba(44, 62, 80, 0.2); 
+}
+
+.tarjeta-hora.stormy-night { 
+  background: rgba(255, 255, 255, 0.98) !important; 
+  border-color: rgba(22, 33, 62, 0.3); 
+  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none !important;
+}
+.tarjeta-hora.stormy-night .icono-hora { color: #AAB3BB; }
+.tarjeta-hora.stormy-night .hora-texto, .tarjeta-hora.stormy-night .temp-texto { color: #2c3e50; }
+.tarjeta-hora.stormy-night:hover { 
+  background: rgba(22, 33, 62, 0.1); 
+  box-shadow: 0 10px 20px rgba(22, 33, 62, 0.2); 
+}
 
 /* 🪄 Botones flecha */
 .boton-izquierda {
