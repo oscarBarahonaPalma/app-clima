@@ -46,7 +46,11 @@ body {
 .layout.sunny,
 .layout.cloudy,
 .layout.rainy,
-.layout.stormy {
+.layout.stormy,
+.layout.clear-night,
+.layout.cloudy-night,
+.layout.rainy-night,
+.layout.stormy-night {
   background: linear-gradient(135deg, #56CCF2, #F2C94C);
 }
 
@@ -55,7 +59,11 @@ body {
 .layout.sunny,
 .layout.cloudy,
 .layout.rainy,
-.layout.stormy {
+.layout.stormy,
+.layout.clear-night,
+.layout.cloudy-night,
+.layout.rainy-night,
+.layout.stormy-night {
   animation: bgShift 15s ease infinite;
 }
 
