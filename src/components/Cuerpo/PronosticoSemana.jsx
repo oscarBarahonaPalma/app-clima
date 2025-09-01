@@ -1,14 +1,32 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import '../../styles/PronosticoSemana.css'; // 👈 Importa el CSS externo
 
-const baseSemana = [
-  { icono: '🌩️🌤️', probLluvia: '80%', mm: '8.2 mm', max: 40, min: 25, viento: '11 - 28 km/h' },
-  { icono: '🌩️🌤️', probLluvia: '70%', mm: '3.6 mm', max: 31, min: 25, viento: '14 - 37 km/h' },
-  { icono: '🌧️',     probLluvia: '40%', mm: '0.8 mm', max: 32, min: 25, viento: '17 - 41 km/h' },
-  { icono: '🌤️',     probLluvia: '10%', mm: '0.0 mm', max: 33, min: 25, viento: '12 - 33 km/h' },
-  { icono: '🌤️',     probLluvia: '5%',  mm: '0.0 mm', max: 34, min: 24, viento: '11 - 30 km/h' },
-  { icono: '🌧️',     probLluvia: '60%', mm: '0.4 mm', max: 34, min: 25, viento: '10 - 29 km/h' },
-];
+// Función para obtener icono según clima y hora
+const getWeatherIcon = (main, icon) => {
+  const isNight = icon && icon.includes('n');
+  
+  switch (main.toLowerCase()) {
+    case 'clear':
+      return isNight ? '🌙' : '☀️';
+    case 'clouds':
+      return '☁️';
+    case 'rain':
+    case 'drizzle':
+      return '🌧️';
+    case 'thunderstorm':
+      return '⛈️';
+    case 'snow':
+      return '❄️';
+    default:
+      return isNight ? '🌙' : '☀️';
+  }
+};
+
+// Función para obtener probabilidad de lluvia
+const getRainProbability = (pop) => {
+  if (!pop) return '0%';
+  return `${Math.round(pop * 100)}%`;
+};
 
 function capitalizar(str) {
   if (!str) return '';
@@ -36,16 +54,61 @@ function generarSemana(fechaBase = new Date()) {
   return dias;
 }
 
-export default function PronosticoSemana() {
+export default function PronosticoSemana({ forecastData, weatherData }) {
   const [animationTrigger, setAnimationTrigger] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
 
   const diasDinamicos = useMemo(() => generarSemana(new Date()), []);
 
-  const datosSemana = useMemo(
-    () => diasDinamicos.map((info, idx) => ({ ...info, ...baseSemana[idx % baseSemana.length] })),
-    [diasDinamicos]
-  );
+  // Procesar datos reales del pronóstico
+  const datosSemana = useMemo(() => {
+    if (!forecastData || !forecastData.list) {
+      // Datos por defecto si no hay datos reales
+      return diasDinamicos.map((info, idx) => ({
+        ...info,
+        icono: '☀️',
+        probLluvia: '0%',
+        mm: '0.0 mm',
+        max: 30,
+        min: 25,
+        viento: '10 - 20 km/h'
+      }));
+    }
+
+    // Agrupar datos por día (cada 8 elementos = 1 día)
+    const dailyData = [];
+    for (let i = 0; i < Math.min(forecastData.list.length, 40); i += 8) {
+      const dayForecasts = forecastData.list.slice(i, i + 8);
+      if (dayForecasts.length > 0) {
+        const maxTemp = Math.round(Math.max(...dayForecasts.map(f => f.main.temp_max)));
+        const minTemp = Math.round(Math.min(...dayForecasts.map(f => f.main.temp_min)));
+        const avgPop = dayForecasts.reduce((sum, f) => sum + (f.pop || 0), 0) / dayForecasts.length;
+        const avgWind = dayForecasts.reduce((sum, f) => sum + (f.wind?.speed || 0), 0) / dayForecasts.length;
+        const mainWeather = dayForecasts[0].weather[0];
+        
+        dailyData.push({
+          icono: getWeatherIcon(mainWeather.main, mainWeather.icon),
+          probLluvia: getRainProbability(avgPop),
+          mm: avgPop > 0 ? `${(avgPop * 10).toFixed(1)} mm` : '0.0 mm',
+          max: maxTemp,
+          min: minTemp,
+          viento: `${Math.round(avgWind)} - ${Math.round(avgWind * 2.5)} km/h`
+        });
+      }
+    }
+
+    return diasDinamicos.map((info, idx) => ({
+      ...info,
+      ...(dailyData[idx] || {
+        icono: '☀️',
+        probLluvia: '0%',
+        mm: '0.0 mm',
+        max: 30,
+        min: 25,
+        viento: '10 - 20 km/h'
+      })
+    }));
+  }, [diasDinamicos, forecastData]);
 
   useEffect(() => {
     setAnimationTrigger(true);

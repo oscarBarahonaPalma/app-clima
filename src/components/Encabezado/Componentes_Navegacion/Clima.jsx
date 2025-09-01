@@ -7,6 +7,7 @@ import '../Style_Menu/Clima.css'
 function Clima() {
   const [weatherData, setWeatherData] = useState(null);
   const [hourlyData, setHourlyData] = useState([]);
+  const [forecastData, setForecastData] = useState(null);
 
   // Función para traducir el tipo de clima a clase CSS
   const traducirClima = (main, icon) => {
@@ -50,6 +51,8 @@ function Clima() {
         
         if (responseForecast.ok) {
           const dataForecast = await responseForecast.json();
+          // Guardar datos completos para pronóstico semanal
+          setForecastData(dataForecast);
           // Tomar las próximas 8 horas (cada 3 horas)
           setHourlyData(dataForecast.list.slice(0, 8));
         }
@@ -152,7 +155,7 @@ function Clima() {
       )}
 
       {/* Pronóstico semanal (abajo) */}
-      <PronosticoSemana />
+      <PronosticoSemana forecastData={forecastData} weatherData={weatherData} />
 
       {/* Footer */}
       {/* <Footer weatherData={weatherData} /> */}

@@ -4,7 +4,7 @@ import ClimaActual from './ClimaActual'
 import PronosticoPorHora from './PronosticoPorHora'
 import PronosticoSemana from './PronosticoSemana'
 
-function Cuerpo() {
+function Cuerpo({ forecastData, weatherData }) {
   return (
    <div className="cuerpo">
       <div className="cuerpo__contenido">
@@ -12,12 +12,12 @@ function Cuerpo() {
         <Ciudad_fecha_hora />
         <ClimaActual />
         
-       
+        
       </div>
 
       
 <div className='semana_oscar'>
-   <PronosticoSemana />
+   <PronosticoSemana forecastData={forecastData} weatherData={weatherData} />
 </div>
     
     </div>
