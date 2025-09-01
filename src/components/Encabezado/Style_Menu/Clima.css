@@ -21,7 +21,11 @@
 .clima_menu.sunny,
 .clima_menu.cloudy,
 .clima_menu.rainy,
-.clima_menu.stormy {
+.clima_menu.stormy,
+.clima_menu.clear-night,
+.clima_menu.cloudy-night,
+.clima_menu.rainy-night,
+.clima_menu.stormy-night {
   background: linear-gradient(135deg, #56CCF2, #F2C94C);
 }
 

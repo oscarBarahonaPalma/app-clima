@@ -9,14 +9,22 @@ function Clima() {
   const [hourlyData, setHourlyData] = useState([]);
 
   // Función para traducir el tipo de clima a clase CSS
-  const traducirClima = (main) => {
+  const traducirClima = (main, icon) => {
+    // Verificar si es de día o noche basado en el icono
+    const isNight = icon && icon.includes('n');
+    
     switch (main.toLowerCase()) {
-      case 'clear': return 'sunny';
-      case 'clouds': return 'cloudy';
+      case 'clear': 
+        return isNight ? 'clear-night' : 'sunny';
+      case 'clouds': 
+        return isNight ? 'cloudy-night' : 'cloudy';
       case 'rain':
-      case 'drizzle': return 'rainy';
-      case 'thunderstorm': return 'stormy';
-      default: return 'sunny';
+      case 'drizzle': 
+        return isNight ? 'rainy-night' : 'rainy';
+      case 'thunderstorm': 
+        return isNight ? 'stormy-night' : 'stormy';
+      default: 
+        return isNight ? 'clear-night' : 'sunny';
     }
   };
 
@@ -56,7 +64,7 @@ function Clima() {
   // Aplicar clases de clima al contenedor
   useEffect(() => {
     if (weatherData?.weather[0]?.main) {
-      const tipoClima = traducirClima(weatherData.weather[0].main);
+      const tipoClima = traducirClima(weatherData.weather[0].main, weatherData.weather[0].icon);
       const climaMenu = document.querySelector('.clima_menu');
       
       if (climaMenu) {
@@ -102,7 +110,7 @@ function Clima() {
         <div className="particle-clima"></div>
 
         {/* Gotas de lluvia */}
-        {weatherData && traducirClima(weatherData.weather[0].main) === 'rainy' &&
+        {weatherData && traducirClima(weatherData.weather[0].main, weatherData.weather[0].icon) === 'rainy' &&
           [...Array(20)].map((_, i) => (
             <div key={i} className="rain-drop-clima"
               style={{
@@ -114,7 +122,7 @@ function Clima() {
         }
 
         {/* Rayos */}
-        {weatherData && traducirClima(weatherData.weather[0].main) === 'stormy' && (
+        {weatherData && traducirClima(weatherData.weather[0].main, weatherData.weather[0].icon) === 'stormy' && (
           <>
             <div className="lightning-clima" style={{ left: '25%' }} />
             <div className="lightning-clima" style={{ left: '70%' }} />
@@ -122,7 +130,7 @@ function Clima() {
         )}
 
         {/* Rayos de sol */}
-        {weatherData && traducirClima(weatherData.weather[0].main) === 'sunny' &&
+        {weatherData && traducirClima(weatherData.weather[0].main, weatherData.weather[0].icon) === 'sunny' &&
           [...Array(8)].map((_, i) => (
             <div key={`sun-ray-${i}`} className="sun-ray-clima"
               style={{
