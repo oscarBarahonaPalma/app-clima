@@ -37,7 +37,7 @@ function WeatherCard({ weather, updatedAt }) {
   });
 
   return (
-    <div className={`tarjeta-clima ${clima}`}>
+    <div className={`tarjeta-clima ${clima} ${isNight ? 'night' : ''}`}>
       <header className="tc-header">
         <p className="tc-location">📍 {weather.name}</p>
         <p className="tc-datetime">{`${fecha}, ${hora}`}</p>

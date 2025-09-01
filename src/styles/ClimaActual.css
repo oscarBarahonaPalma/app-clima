@@ -174,6 +174,7 @@
 
 
 /* 🎨 Variantes por clima */
+/* DÍA */
 .tarjeta-clima.clear {
   background: linear-gradient(135deg, #FFC947, #FF6B6B);
 }
@@ -191,6 +192,29 @@
 .tarjeta-clima.snow {
   background: linear-gradient(135deg, #E0EAFc, #CFDEF3);
   color: #333;
+}
+
+/* NOCHE */
+.tarjeta-clima.clear.night {
+  background: linear-gradient(135deg, #2C3E50, #34495E);
+  color: #ecf0f1;
+}
+.tarjeta-clima.clouds.night {
+  background: linear-gradient(135deg, #34495E, #2C3E50);
+  color: #bdc3c7;
+}
+.tarjeta-clima.rain.night,
+.tarjeta-clima.drizzle.night {
+  background: linear-gradient(135deg, #2C3E50, #3498db);
+  color: #ecf0f1;
+}
+.tarjeta-clima.thunderstorm.night {
+  background: linear-gradient(135deg, #1a1a2e, #16213e);
+  color: #ecf0f1;
+}
+.tarjeta-clima.snow.night {
+  background: linear-gradient(135deg, #34495E, #5D6D7E);
+  color: #ecf0f1;
 }
 
 /* 🧱 Estructura interna */
