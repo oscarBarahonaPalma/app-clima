@@ -95,7 +95,7 @@
     width: 300px !important;
     height: 100vh !important;
     display: none !important;
-    background: #212121 !important;
+    background: transparent !important;
     z-index: 999 !important; /* Muy alto para estar por encima de todo */
     overflow-y: hidden !important;
     -webkit-overflow-scrolling: touch !important;
@@ -129,7 +129,7 @@
   }
 
   .menu-close-btn:hover {
-    background: rgba(255, 0, 0, 0.1) !important;
+    background: transparent !important;
     transform: scale(1.1) !important;
   }
 
@@ -180,7 +180,7 @@
 
   .header .menu li a:hover,
   .header.collapse .menu li a:hover {
-    background: rgba(255,255,255,0.15) !important;
+    background: transparent !important;
     border-color: rgba(255,255,255,0.2) !important;
     transform: translateX(10px) !important;
   }
