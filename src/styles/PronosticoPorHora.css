@@ -49,15 +49,15 @@
 /* 📦 Contenedor principal */
 .por-hora {
   width: 100%;
-  max-width: 1200px;
+  max-width: min(1200px, 95vw);
   margin: 0 auto;
-  padding: 1rem;
+  padding: clamp(0.6rem, 2vw, 1rem);
   box-sizing: border-box;
-  background: transparent;
-  border-radius: 1.5rem;
-  box-shadow: 
-    0 8px 32px rgba(0, 0, 0, 0.1),
-    0 4px 16px rgba(0, 0, 0, 0.08);
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-radius: clamp(8px, 2vw, 12px);
 }
 
 /* En pantallas grandes, ajustar el contenedor para el grid */
@@ -95,201 +95,31 @@
 }
 
 .relative-box { position: relative; }
-.bg-grad-1,
-.bg-grad-2 {
-  position: absolute;
-  inset: 0;
-  border-radius: 1.5rem;
-  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-}
-.bg-grad-1 { 
-  background: transparent; 
-  opacity: 1; 
-  box-shadow: 
-    0 20px 60px rgba(0, 0, 0, 0.25),
-    0 12px 40px rgba(0, 0, 0, 0.18),
-    0 6px 20px rgba(0, 0, 0, 0.12),
-    inset 0 1px 0 rgba(255, 255, 255, 0.4);
-  transform: scale(1.02);
-}
-.bg-grad-2 { 
-  background: transparent; 
-  box-shadow: 
-    inset 0 1px 0 rgba(255, 255, 255, 0.2),
-    0 4px 12px rgba(0, 0, 0, 0.1);
-  transform: scale(1.01);
-}
 
-/* Temas por condición para contenedor */
-.por-hora.sunny .bg-grad-1 { 
-  background: transparent; 
-  box-shadow: 
-    0 8px 25px rgba(0, 0, 0, 0.25),
-    0 4px 15px rgba(0, 0, 0, 0.15),
-    inset 0 1px 0 rgba(255, 255, 255, 0.4);
-  transform: scale(1.02);
-}
-.por-hora.sunny .bg-grad-2 { 
-  background: transparent; 
-  box-shadow: 
-    inset 0 1px 0 rgba(255, 255, 255, 0.3),
-    0 2px 8px rgba(0, 0, 0, 0.2);
-  transform: scale(1.01);
-}
 
-.por-hora.cloudy .bg-grad-1 { 
-  background: transparent; 
-  box-shadow: 
-    0 20px 60px rgba(120, 130, 140, 0.25),
-    0 12px 40px rgba(120, 130, 140, 0.18),
-    0 6px 20px rgba(120, 130, 140, 0.12),
-    inset 0 1px 0 rgba(255, 255, 255, 0.35);
-  transform: scale(1.02);
-}
-.por-hora.cloudy .bg-grad-2 { 
-  background: transparent; 
-  box-shadow: 
-    inset 0 1px 0 rgba(255, 255, 255, 0.25),
-    0 4px 12px rgba(120, 130, 140, 0.1);
-  transform: scale(1.01);
-}
-
-.por-hora.rainy .bg-grad-1 { 
-  background: transparent; 
-  box-shadow: 
-    0 20px 60px rgba(80, 90, 100, 0.25),
-    0 12px 40px rgba(80, 90, 100, 0.18),
-    0 6px 20px rgba(80, 90, 100, 0.12),
-    inset 0 1px 0 rgba(255, 255, 255, 0.3);
-  transform: scale(1.02);
-}
-.por-hora.rainy .bg-grad-2 { 
-  background: transparent(145deg, rgba(0,0,0,0.06), rgba(255,255,255,0.04)); 
-  box-shadow: 
-    inset 0 1px 0 rgba(255, 255, 255, 0.25),
-    0 4px 12px rgba(80, 90, 100, 0.1);
-  transform: scale(1.01);
-}
-
-.por-hora.stormy .bg-grad-1 { 
-  background: transparent(145deg, rgba(60,70,80,0.12), rgba(30,40,50,0.08)); 
-  box-shadow: 
-    0 20px 60px rgba(30, 40, 50, 0.25),
-    0 12px 40px rgba(30, 40, 50, 0.18),
-    0 6px 20px rgba(30, 40, 50, 0.12),
-    inset 0 1px 0 rgba(255, 255, 255, 0.25);
-  transform: scale(1.02);
-}
-.por-hora.stormy .bg-grad-2 { 
-  background: transparent(145deg, rgba(0,0,0,0.06), rgba(255,255,255,0.03)); 
-  box-shadow: 
-    inset 0 1px 0 rgba(255, 255, 255, 0.2),
-    0 4px 12px rgba(30, 40, 50, 0.1);
-  transform: scale(1.01);
-}
-
-/* NOCHE - Temas por condición para contenedor */
-.por-hora.clear-night .bg-grad-1 { 
-  background: transparent(145deg, rgba(44,62,80,0.35), rgba(52,73,94,0.2)); 
-  box-shadow: 
-    0 8px 25px rgba(44, 62, 80, 0.25),
-    0 4px 15px rgba(44, 62, 80, 0.15),
-    inset 0 1px 0 rgba(255, 255, 255, 0.3);
-  transform: scale(1.02);
-}
-.por-hora.clear-night .bg-grad-2 { 
-  background: transparent(145deg, rgba(44,62,80,0.2), rgba(52,73,94,0.15)); 
-  box-shadow: 
-    inset 0 1px 0 rgba(255, 255, 255, 0.2),
-    0 2px 8px rgba(44, 62, 80, 0.2);
-  transform: scale(1.01);
-}
-
-.por-hora.cloudy-night .bg-grad-1 { 
-  background: transparent(145deg, rgba(52,73,94,0.12), rgba(44,62,80,0.08)); 
-  box-shadow: 
-    0 20px 60px rgba(44, 62, 80, 0.25),
-    0 12px 40px rgba(44, 62, 80, 0.18),
-    0 6px 20px rgba(44, 62, 80, 0.12),
-    inset 0 1px 0 rgba(255, 255, 255, 0.25);
-  transform: scale(1.02);
-}
-.por-hora.cloudy-night .bg-grad-2 { 
-  background: transparent(145deg, rgba(255,255,255,0.03), rgba(0,0,0,0.08)); 
-  box-shadow: 
-    inset 0 1px 0 rgba(255, 255, 255, 0.15),
-    0 4px 12px rgba(44, 62, 80, 0.1);
-  transform: scale(1.01);
-}
-
-.por-hora.rainy-night .bg-grad-1 { 
-  background: transparent(145deg, rgba(44,62,80,0.12), rgba(52,73,94,0.08)); 
-  box-shadow: 
-    0 20px 60px rgba(44, 62, 80, 0.25),
-    0 12px 40px rgba(44, 62, 80, 0.18),
-    0 6px 20px rgba(44, 62, 80, 0.12),
-    inset 0 1px 0 rgba(255, 255, 255, 0.2);
-  transform: scale(1.02);
-}
-.por-hora.rainy-night .bg-grad-2 { 
-  background: transparent(145deg, rgba(0,0,0,0.08), rgba(255,255,255,0.02)); 
-  box-shadow: 
-    inset 0 1px 0 rgba(255, 255, 255, 0.15),
-    0 4px 12px rgba(44, 62, 80, 0.1);
-  transform: scale(1.01);
-}
-
-.por-hora.stormy-night .bg-grad-1 { 
-  background: transparent(145deg, rgba(26,26,46,0.12), rgba(22,33,62,0.08)); 
-  box-shadow: 
-    0 20px 60px rgba(22, 33, 62, 0.25),
-    0 12px 40px rgba(22, 33, 62, 0.18),
-    0 6px 20px rgba(22, 33, 62, 0.12),
-    inset 0 1px 0 rgba(255, 255, 255, 0.15);
-  transform: scale(1.02);
-}
-.por-hora.stormy-night .bg-grad-2 { 
-  background: transparent(145deg, rgba(0,0,0,0.08), rgba(255,255,255,0.01)); 
-  box-shadow: 
-    inset 0 1px 0 rgba(255, 255, 255, 0.1),
-    0 4px 12px rgba(22, 33, 62, 0.1);
-  transform: scale(1.01);
-}
-
-.contenido-superpuesto { 
-  position: relative; 
-  z-index: 10; 
-  padding: 1.25rem; 
+.contenido-superpuesto {
+  position: relative;
+  z-index: 10;
+  padding: 0.9rem;
   transition: all 0.3s ease;
 }
 
-/* Efecto hover sutil en el contenedor principal */
-.por-hora:hover .bg-grad-1 {
-  transform: scale(1.01);
-  box-shadow: 
-    0 12px 40px rgba(0, 0, 0, 0.15),
-    0 6px 20px rgba(0, 0, 0, 0.1),
-    inset 0 1px 0 rgba(255, 255, 255, 0.5);
-}
-
-.por-hora:hover .bg-grad-2 {
-  transform: scale(1.005);
-}
 
 .H3 {
-  font-size: clamp(1rem, 2.5vw, 1.4rem);
+  font-size: clamp(0.9rem, 2vw, 1.2rem);
   font-weight: 700;
   text-align: center;
   color: white;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
 }
 
 /* Subtítulo del tipo de clima */
 .weather-type-subtitle {
-  font-size: clamp(0.8rem, 2vw, 1rem);
+  font-size: clamp(0.7rem, 1.8vw, 0.9rem);
   font-weight: 500;
   text-align: center;
-  color: rgba(255, 255, 255, 0.8);
-  margin: 0.5rem 0 1rem 0;
+  color: white;
+  margin: 0.3rem 0 0.8rem 0;
   text-transform: capitalize;
 }
 
@@ -300,43 +130,47 @@
 }
 .horas {
   display: flex;
-  gap: 0.75rem;
+  gap: 0.6rem;
   overflow-x: auto;
-  padding-bottom: 0.5rem;
+  padding-bottom: 0.4rem;
   scroll-behavior: smooth;
   flex-wrap: wrap;
   justify-content: center;
   align-items: flex-start;
-  row-gap: 1rem;
+  row-gap: 0.8rem;
 }
 .hora {
   flex-shrink: 0;
-  min-width: clamp(60px, 15vw, 80px);
+  min-width: clamp(55px, 14vw, 75px);
   text-align: center;
   flex: 0 0 auto;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.3rem;
 }
 
 
 
 /* Tarjeta por hora */
 .tarjeta-hora {
-  background: rgba(255, 255, 255, 0.98) !important;
-  border: 1px solid rgba(255, 255, 255, 0.4);
-  border-radius: 1.2rem;
-  padding: 1.2rem 1rem;
-  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  background: linear-gradient(145deg,
+    rgba(255, 255, 255, 0.98),
+    rgba(248, 250, 252, 0.95),
+    rgba(241, 245, 249, 0.92)
+  ) !important;
+  border: 1px solid rgba(59, 130, 246, 0.15);
+  border-radius: 16px;
+  padding: 1rem 0.8rem;
+  transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
   cursor: pointer;
-  box-shadow: 
-    0 20px 60px rgba(0, 0, 0, 0.25),
-    0 8px 30px rgba(0, 0, 0, 0.15),
-    inset 0 1px 0 rgba(255, 255, 255, 1);
+  box-shadow:
+    0 8px 25px rgba(0, 0, 0, 0.08),
+    0 4px 12px rgba(0, 0, 0, 0.06),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9),
+    0 1px 3px rgba(59, 130, 246, 0.1);
   position: relative;
   overflow: hidden;
   -webkit-backdrop-filter: none !important;
   backdrop-filter: none !important;
-  transform: translateY(-6px) scale(1.03);
-  border-color: rgba(255, 255, 255, 0.6);
+  transform: translateY(-2px);
 }
 
 .tarjeta-hora::before {
@@ -345,158 +179,163 @@
   top: 0;
   left: 0;
   right: 0;
-  height: 2px;
-  background: transparent(90deg, 
-    transparent, 
-    rgba(59, 130, 246, 0.6), 
-    rgba(147, 51, 234, 0.6), 
-    transparent
+  height: 4px;
+  background: linear-gradient(90deg,
+    transparent 0%,
+    rgba(59, 130, 246, 0.6) 20%,
+    rgba(99, 102, 241, 0.8) 50%,
+    rgba(59, 130, 246, 0.6) 80%,
+    transparent 100%
   );
-  opacity: 1;
-  transition: opacity 0.3s ease;
+  border-radius: 16px 16px 0 0;
+  opacity: 0.8;
+  transition: all 0.4s ease;
 }
 .tarjeta-hora:hover {
-  background: rgba(255, 255, 255, 1) !important;
-  transform: translateY(-6px) scale(1.03);
-  box-shadow: 
-    0 20px 60px rgba(0, 0, 0, 0.25),
-    0 8px 30px rgba(0, 0, 0, 0.15),
-    inset 0 1px 0 rgba(255, 255, 255, 1);
-  border-color: rgba(255, 255, 255, 0.6);
+  background: linear-gradient(145deg,
+    rgba(255, 255, 255, 0.99),
+    rgba(248, 250, 252, 0.98),
+    rgba(241, 245, 249, 0.96)
+  ) !important;
+  transform: translateY(-6px) scale(1.02);
+  box-shadow:
+    0 16px 45px rgba(0, 0, 0, 0.12),
+    0 8px 25px rgba(0, 0, 0, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 1),
+    0 2px 8px rgba(59, 130, 246, 0.15);
+  border-color: rgba(59, 130, 246, 0.25);
   -webkit-backdrop-filter: none !important;
   backdrop-filter: none !important;
 }
-.hora-texto { 
-  color: #2c3e50; 
-  font-weight: 600; 
-  font-size: 0.8rem; 
-  margin-bottom: 0.4rem; 
+.tarjeta-hora:hover::before {
+  opacity: 1;
+  height: 5px;
 }
-.icono-hora { 
-  display: flex; 
-  justify-content: center; 
-  margin-bottom: 0.4rem; 
+.hora-texto {
+  color: #334155;
+  font-weight: 600;
+  font-size: 0.75rem;
+  margin-bottom: 0.4rem;
+  letter-spacing: 0.025em;
+  text-transform: uppercase;
+  font-size: 0.65rem;
 }
-.temp-texto { 
-  color: #2c3e50; 
-  font-weight: 800; 
-  font-size: 1rem; 
+.icono-hora {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 0.5rem;
 }
-.icon-24 { width: 20px; height: 20px; }
+.temp-texto {
+  color: #0f172a;
+  font-weight: 700;
+  font-size: 0.95rem;
+  letter-spacing: -0.025em;
+}
+.icon-24 { width: 18px; height: 18px; }
 .amarillo { color: #FFD166; }
-.azul { color: #3498db; }
 .gris { color: #D0D7DF; }
 
 /* Estados por tarjeta según condición */
-.tarjeta-hora.sunny { 
-  background: rgba(255, 255, 255, 0.98) !important; 
-  border-color: rgba(255, 221, 87, 0.3); 
+.tarjeta-hora.sunny {
+  border-color: rgba(251, 191, 36, 0.2);
   -webkit-backdrop-filter: none !important;
   backdrop-filter: none !important;
 }
-.tarjeta-hora.sunny .icono-hora { color: #FFD166; }
-.tarjeta-hora.sunny .hora-texto, .tarjeta-hora.sunny .temp-texto { color: #2c3e50; }
-.tarjeta-hora.sunny:hover { 
-  background: rgba(255, 221, 87, 0.1); 
-  box-shadow: 0 10px 20px rgba(255, 209, 102, 0.2); 
+.tarjeta-hora.sunny .icono-hora { color: #f59e0b; }
+.tarjeta-hora.sunny .hora-texto, .tarjeta-hora.sunny .temp-texto { color: #92400e; }
+.tarjeta-hora.sunny:hover {
+  border-color: rgba(251, 191, 36, 0.3);
+  box-shadow:
+    0 16px 45px rgba(0, 0, 0, 0.12),
+    0 8px 25px rgba(0, 0, 0, 0.08),
+    0 2px 8px rgba(251, 191, 36, 0.15);
+}
+.tarjeta-hora.sunny::before {
+  background: linear-gradient(90deg,
+    transparent 0%,
+    rgba(251, 191, 36, 0.6) 20%,
+    rgba(245, 158, 11, 0.8) 50%,
+    rgba(251, 191, 36, 0.6) 80%,
+    transparent 100%
+  );
 }
 
-.tarjeta-hora.cloudy { 
-  background: rgba(255, 255, 255, 0.98) !important; 
-  border-color: rgba(180, 190, 200, 0.3); 
+.tarjeta-hora.cloudy {
+  border-color: rgba(148, 163, 184, 0.2);
   -webkit-backdrop-filter: none !important;
   backdrop-filter: none !important;
 }
-.tarjeta-hora.cloudy .icono-hora { color: #D0D7DF; }
-.tarjeta-hora.cloudy .hora-texto, .tarjeta-hora.cloudy .temp-texto { color: #2c3e50; }
-.tarjeta-hora.cloudy:hover { 
-  background: rgba(180, 190, 200, 0.1); 
-  box-shadow: 0 10px 20px rgba(0,0,0,0.15); 
+.tarjeta-hora.cloudy .icono-hora { color: #64748b; }
+.tarjeta-hora.cloudy .hora-texto, .tarjeta-hora.cloudy .temp-texto { color: #334155; }
+.tarjeta-hora.cloudy:hover {
+  border-color: rgba(148, 163, 184, 0.3);
+  box-shadow:
+    0 16px 45px rgba(0, 0, 0, 0.12),
+    0 8px 25px rgba(0, 0, 0, 0.08),
+    0 2px 8px rgba(148, 163, 184, 0.15);
+}
+.tarjeta-hora.cloudy::before {
+  background: linear-gradient(90deg,
+    transparent 0%,
+    rgba(148, 163, 184, 0.5) 20%,
+    rgba(100, 116, 139, 0.7) 50%,
+    rgba(148, 163, 184, 0.5) 80%,
+    transparent 100%
+  );
 }
 
-.tarjeta-hora.rainy { 
-  background: rgba(255, 255, 255, 0.98) !important; 
-  border-color: rgba(120, 130, 140, 0.3); 
+.tarjeta-hora.rainy {
+  border-color: rgba(56, 189, 248, 0.2);
   -webkit-backdrop-filter: none !important;
   backdrop-filter: none !important;
 }
-.tarjeta-hora.rainy .icono-hora { color: #B8C1C8; }
-.tarjeta-hora.rainy .hora-texto, .tarjeta-hora.rainy .temp-texto { color: #2c3e50; }
-.tarjeta-hora.rainy:hover { 
-  background: rgba(120, 130, 140, 0.1); 
-  box-shadow: 0 10px 20px rgba(0,0,0,0.15); 
+.tarjeta-hora.rainy .icono-hora { color: #0ea5e9; }
+.tarjeta-hora.rainy .hora-texto, .tarjeta-hora.rainy .temp-texto { color: #0c4a6e; }
+.tarjeta-hora.rainy:hover {
+  border-color: rgba(56, 189, 248, 0.3);
+  box-shadow:
+    0 16px 45px rgba(0, 0, 0, 0.12),
+    0 8px 25px rgba(0, 0, 0, 0.08),
+    0 2px 8px rgba(56, 189, 248, 0.15);
+}
+.tarjeta-hora.rainy::before {
+  background: linear-gradient(90deg,
+    transparent 0%,
+    rgba(56, 189, 248, 0.5) 20%,
+    rgba(14, 165, 233, 0.7) 50%,
+    rgba(56, 189, 248, 0.5) 80%,
+    transparent 100%
+  );
 }
 
-.tarjeta-hora.stormy { 
-  background: rgba(255, 255, 255, 0.98) !important; 
-  border-color: rgba(90, 100, 110, 0.3); 
+.tarjeta-hora.stormy {
+  border-color: rgba(75, 85, 99, 0.2);
   -webkit-backdrop-filter: none !important;
   backdrop-filter: none !important;
 }
-.tarjeta-hora.stormy .icono-hora { color: #AAB3BB; }
-.tarjeta-hora.stormy .hora-texto, .tarjeta-hora.stormy .temp-texto { color: #2c3e50; }
-.tarjeta-hora.stormy:hover { 
-  background: rgba(90, 100, 110, 0.1); 
-  box-shadow: 0 10px 20px rgba(0,0,0,0.15); 
+.tarjeta-hora.stormy .icono-hora { color: #4b5563; }
+.tarjeta-hora.stormy .hora-texto, .tarjeta-hora.stormy .temp-texto { color: #1f2937; }
+.tarjeta-hora.stormy:hover {
+  border-color: rgba(75, 85, 99, 0.3);
+  box-shadow:
+    0 16px 45px rgba(0, 0, 0, 0.12),
+    0 8px 25px rgba(0, 0, 0, 0.08),
+    0 2px 8px rgba(75, 85, 99, 0.15);
+}
+.tarjeta-hora.stormy::before {
+  background: linear-gradient(90deg,
+    transparent 0%,
+    rgba(75, 85, 99, 0.5) 20%,
+    rgba(31, 41, 55, 0.7) 50%,
+    rgba(75, 85, 99, 0.5) 80%,
+    transparent 100%
+  );
 }
 
 /* Animaciones sutiles por condición */
 .icono-hora.sunny .icon-24 { animation: subtle-pulse 4s ease-in-out infinite; }
 .icono-hora.rainy .icon-24 { opacity: 0.9; }
 .icono-hora.cloudy .icon-24 { opacity: 0.95; }
-
-/* NOCHE - Estados por tarjeta según condición */
-.tarjeta-hora.clear-night { 
-  background: rgba(255, 255, 255, 0.98) !important; 
-  border-color: rgba(52, 73, 94, 0.3); 
-  -webkit-backdrop-filter: none !important;
-  backdrop-filter: none !important;
-}
-.tarjeta-hora.clear-night .icono-hora { color: #3498db; }
-.tarjeta-hora.clear-night .hora-texto, .tarjeta-hora.clear-night .temp-texto { color: #2c3e50; }
-.tarjeta-hora.clear-night:hover { 
-  background: rgba(52, 73, 94, 0.1); 
-  box-shadow: 0 10px 20px rgba(52, 73, 94, 0.2); 
-}
-
-.tarjeta-hora.cloudy-night { 
-  background: rgba(255, 255, 255, 0.98) !important; 
-  border-color: rgba(44, 62, 80, 0.3); 
-  -webkit-backdrop-filter: none !important;
-  backdrop-filter: none !important;
-}
-.tarjeta-hora.cloudy-night .icono-hora { color: #D0D7DF; }
-.tarjeta-hora.cloudy-night .hora-texto, .tarjeta-hora.cloudy-night .temp-texto { color: #2c3e50; }
-.tarjeta-hora.cloudy-night:hover { 
-  background: rgba(44, 62, 80, 0.1); 
-  box-shadow: 0 10px 20px rgba(44, 62, 80, 0.2); 
-}
-
-.tarjeta-hora.rainy-night { 
-  background: rgba(255, 255, 255, 0.98) !important; 
-  border-color: rgba(44, 62, 80, 0.3); 
-  -webkit-backdrop-filter: none !important;
-  backdrop-filter: none !important;
-}
-.tarjeta-hora.rainy-night .icono-hora { color: #B8C1C8; }
-.tarjeta-hora.rainy-night .hora-texto, .tarjeta-hora.rainy-night .temp-texto { color: #2c3e50; }
-.tarjeta-hora.rainy-night:hover { 
-  background: rgba(44, 62, 80, 0.1); 
-  box-shadow: 0 10px 20px rgba(44, 62, 80, 0.2); 
-}
-
-.tarjeta-hora.stormy-night { 
-  background: rgba(255, 255, 255, 0.98) !important; 
-  border-color: rgba(22, 33, 62, 0.3); 
-  -webkit-backdrop-filter: none !important;
-  backdrop-filter: none !important;
-}
-.tarjeta-hora.stormy-night .icono-hora { color: #AAB3BB; }
-.tarjeta-hora.stormy-night .hora-texto, .tarjeta-hora.stormy-night .temp-texto { color: #2c3e50; }
-.tarjeta-hora.stormy-night:hover { 
-  background: rgba(22, 33, 62, 0.1); 
-  box-shadow: 0 10px 20px rgba(22, 33, 62, 0.2); 
-}
 
 /* 🪄 Botones flecha */
 .boton-izquierda {
@@ -505,16 +344,16 @@
   top: 50%;
   transform: translateY(-50%);
   z-index: 20;
-  background: transparent;
+  background: rgba(70, 130, 180, 0.2);
   -webkit-backdrop-filter: blur(8px);
   backdrop-filter: blur(8px);
-  border: 1px solid rgba(255, 255, 255, 0.3);
+  border: 1px solid rgba(135, 206, 250, 0.4);
   border-radius: 9999px;
   padding: 0.75rem;
   color: white;
   transition: transform 0.3s ease, background 0.3s ease;
 }
-.boton-izquierda:hover { background: transparent; transform: translateY(-50%) scale(1.1); }
+.boton-izquierda:hover { background: rgba(135, 206, 250, 0.3); transform: translateY(-50%) scale(1.1); }
 
 .boton-derecha {
   position: absolute;
@@ -522,16 +361,16 @@
   top: 50%;
   transform: translateY(-50%);
   z-index: 20;
-  background: transparent;
+  background: rgba(70, 130, 180, 0.2);
   -webkit-backdrop-filter: blur(8px);
   backdrop-filter: blur(8px);
-  border: 1px solid rgba(255, 255, 255, 0.3);
+  border: 1px solid rgba(135, 206, 250, 0.4);
   border-radius: 9999px;
   padding: 0.75rem;
   color: white;
   transition: transform 0.3s ease, background 0.3s ease;
 }
-.boton-derecha:hover { background: transparent; transform: translateY(-50%) scale(1.1); }
+.boton-derecha:hover { background: rgba(135, 206, 250, 0.3); transform: translateY(-50%) scale(1.1); }
 .chevron-20 { width: 20px; height: 20px; }
 
 /* ✅ Mobile tweaks */
@@ -542,8 +381,8 @@
 
   .hora {
     min-width: 50px;
-    flex: 0 0 calc(50% - 0.25rem);
-    max-width: calc(50% - 0.25rem);
+    flex: 0 0 calc(50% - 0.3rem);
+    max-width: calc(50% - 0.3rem);
   }
 
   .boton-izquierda,
@@ -557,29 +396,29 @@
   .por-hora {
     width: 100%;
     max-width: none;
-    padding: 0.25rem;
+    padding: 0.5rem;
     margin: 1rem 0;
   }
-  
+
   .contenido-superpuesto {
     padding: 0.75rem;
   }
-  
+
   .horas {
-    gap: 1rem;
-    padding: 0 0.25rem 0.5rem 0.25rem;
-    row-gap: 1.5rem;
+    gap: 0.6rem;
+    padding: 0 0.5rem 0.5rem 0.5rem;
+    row-gap: 1rem;
     justify-content: center;
   }
-  
+
   .hora {
-    min-width: clamp(75px, 20vw, 95px);
-    flex: 0 0 calc(50% - 0.5rem);
-    max-width: calc(50% - 0.5rem);
+    min-width: clamp(65px, 18vw, 85px);
+    flex: 0 0 calc(50% - 0.3rem);
+    max-width: calc(50% - 0.3rem);
   }
-  
+
   .tarjeta-hora {
-    padding: 1.25rem 0.75rem;
+    padding: 0.8rem 0.7rem;
   }
 }
 

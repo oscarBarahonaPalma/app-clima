@@ -52,8 +52,8 @@
   -webkit-tap-highlight-color: transparent;
 }
 
-/* 💻 Escritorio: menú horizontal a la derecha */
-@media (min-width: 1281px) {
+/* 💻 TABLETS Y DESKTOP: menú horizontal a la derecha */
+@media (min-width: 900px) {
   .menu ul {
     display: flex;
     justify-content: flex-end;
@@ -82,8 +82,22 @@
   }
 }
 
-/* 📱 Móvil: menú vertical fullscreen (todo ancho y alto) */
-@media (max-width: 1280px) {
+/* 🖥️ Desktop muy grande: menú con más espacio */
+@media (min-width: 1400px) {
+  .menu ul {
+    gap: 4rem;
+    margin: 0.2rem 120px 0 0;
+  }
+
+  .menu li a {
+    font-size: 1.4rem;
+  }
+}
+
+
+
+/* 📱 MÓVILES Y TABLETS PEQUEÑOS: menú drawer (hamburguesa) */
+@media (max-width: 899px) {
   /* Hacer las reglas más específicas para evitar conflictos */
   .header .menu,
   .header.collapse .menu {
@@ -104,9 +118,9 @@
   }
 
   .header .menu.open,
-  .header.collapse .menu.open { 
-    display: block !important; 
-    transform: translateX(0) !important; 
+  .header.collapse .menu.open {
+    display: block !important;
+    transform: translateX(0) !important;
   }
 
   /* Botón de cerrar del menú */
@@ -160,8 +174,8 @@
   }
 
   .header .menu li,
-  .header.collapse .menu li { 
-    width: 100% !important; 
+  .header.collapse .menu li {
+    width: 100% !important;
     /* Asegurar que cada elemento se expanda */
     flex: 0 0 auto !important;
   }
@@ -185,3 +199,4 @@
     transform: translateX(10px) !important;
   }
 }
+

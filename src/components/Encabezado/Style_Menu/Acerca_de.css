@@ -1,0 +1,46 @@
+/* ----------------------------
+   Acerca_de.css
+---------------------------- */
+
+.acerca-de-container {
+  padding: 2rem;
+  color: white;
+  text-align: center;
+  min-height: 60vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.acerca-de-container h2 {
+  color: white;
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  font-weight: bold;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+
+.acerca-de-container p {
+  color: white;
+  font-size: 1.2rem;
+  line-height: 1.6;
+  max-width: 600px;
+  margin: 0 auto;
+  opacity: 0.9;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .acerca-de-container {
+    padding: 1rem;
+  }
+
+  .acerca-de-container h2 {
+    font-size: 2rem;
+  }
+
+  .acerca-de-container p {
+    font-size: 1rem;
+  }
+}

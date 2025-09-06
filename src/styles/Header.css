@@ -4,18 +4,29 @@
   top: 0;
   z-index: 200; /* por encima del drawer */
   display: grid;
-  grid-template-columns: auto 1fr auto; /* logo | search | hamburger */
-  column-gap: 1rem; /* separación consistente entre logo, buscador y hamburguesa */
+  grid-template-columns: auto 1fr auto; /* logo | search | menu */
+  place-items: center;
+  column-gap: clamp(1.5rem, 4vw, 3rem); /* separación amplia entre elementos */
   align-items: center;
-  min-height: 72px;
-  padding: 0.5rem 1rem;
+  min-height: 88px;
+  height: 88px;
+  padding: clamp(0.25rem, 1vh, 0.5rem) clamp(0.5rem, 2vw, 1rem) clamp(0.25rem, 1vh, 0.5rem) 0;
   box-sizing: border-box;
   width: 100%;
   margin: 0;
-  background: rgba(255, 255, 255, 0.06);
-  -webkit-backdrop-filter: blur(10px);
-  backdrop-filter: blur(10px);
-  border-bottom: 1px solid rgba(255,255,255,0.12);
+  background: #1a365d;
+  border-bottom: none;
+  justify-items: start; /* Asegurar que el logo esté alineado a la izquierda */
+}
+
+/* Asegurar que el logo esté siempre pegado al principio */
+.header > :first-child {
+  justify-self: start;
+  align-self: center;
+  position: relative;
+  left: 0;
+  margin-left: 0;
+  padding-left: 1rem; /* Espacio interno para que no toque el borde absoluto */
 }
 
 /* 🧭 Zona del buscador dentro del header */
@@ -24,57 +35,260 @@
   display: flex;
   align-items: center;
   min-width: 200px;
-  max-width: clamp(360px, 50vw, 820px);
+  max-width: clamp(180px, 30vw, 400px);
   margin: 0; /* usaremos column-gap del grid para separar */
   height: 100%;
+  margin-right: 0.5rem; /* Espacio adicional desde el siguiente elemento */
 }
 
+/* 📱 Pequeñas tablets */
+@media (min-width: 768px) and (max-width: 899px) {
+  #header-search,
+  .padre {
+    max-width: 200px;
+  }
+}
+
+/* 📱 Tablets medianas */
+@media (min-width: 900px) and (max-width: 1099px) {
+  #header-search,
+  .padre {
+    max-width: 280px;
+  }
+}
+
+/* 🖥️ Desktop pequeño */
+@media (min-width: 1100px) and (max-width: 1199px) {
+  #header-search,
+  .padre {
+    max-width: 320px;
+  }
+}
+
+/* 🖥️ Desktop mediano */
+@media (min-width: 1200px) and (max-width: 1399px) {
+  #header-search,
+  .padre {
+    max-width: 400px;
+  }
+}
+
+/* 🖥️ Desktop grande */
 @media (min-width: 1400px) {
   #header-search,
   .padre {
-    max-width: 900px;
+    max-width: 500px;
   }
 }
 
-/* 🖥️ Escritorio grande: layout original y sin hamburguesa */
-@media (min-width: 1281px) {
-  .hamburger { display: none !important; }
-  .menu { position: static !important; display: block !important; }
+/* 📱 MÓVILES Y TABLETS PEQUEÑOS: Solo hamburguesa (menú drawer) */
+@media (max-width: 899px) {
+  .hamburger {
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
+  }
+  .menu {
+    display: none !important; /* Ocultar menú horizontal */
+  }
 }
 
-/* Tablet/medianas: mostrar hamburguesa y permitir colapso */
-@media (max-width: 1280px) {
+/* 📱 TABLETS MEDIANAS Y GRANDES + DESKTOP: Solo menú horizontal (sin hamburguesa) */
+@media (min-width: 900px) {
+  .hamburger {
+    display: none !important; /* Ocultar hamburguesa */
+  }
+  .menu {
+    position: static !important;
+    display: block !important; /* Mostrar menú horizontal */
+    justify-self: end; /* Alinear menú a la derecha */
+    margin-left: 1rem; /* Espacio adicional desde el buscador */
+  }
+
+  /* Aumentar separación entre buscador y menú horizontal */
+  .header {
+    column-gap: clamp(3rem, 6vw, 5rem) !important; /* Más espacio generoso */
+  }
+}
+
+/* 🚨 SISTEMA ANTI-CHOQUE: Evitar que menú se superponga con buscador */
+@media (min-width: 900px) and (max-width: 1199px) {
+  /* Tablets y desktop pequeño: reducir menú si es necesario */
+  .menu ul {
+    gap: clamp(1.5rem, 3vw, 2.5rem) !important; /* Gap adaptable */
+  }
+
+  .menu li a {
+    font-size: clamp(1rem, 2.5vw, 1.1rem) !important; /* Fuente adaptable */
+    padding: clamp(0.5rem, 1.5vw, 0.75rem) !important; /* Padding adaptable */
+  }
+}
+
+@media (min-width: 1200px) and (max-width: 1399px) {
+  /* Desktop mediano: equilibrio entre buscador y menú */
   #header-search,
   .padre {
+    max-width: clamp(300px, 25vw, 350px) !important; /* Reducir si es necesario */
+  }
 
-  /* Evitar que el header cree un "containing block" para elementos fixed en pantallas pequeñas.
-     Algunas propiedades como `backdrop-filter`/`filter` hacen que los elementos `position: fixed`
-     se posicionen respecto al header en vez del viewport, impidiendo que el drawer cubra 100vh.
-     Desactivamos el filtro en dispositivos pequeños para que el menú fijo pueda ocupar toda la pantalla. */
-  .header {
-    -webkit-backdrop-filter: none !important;
-    backdrop-filter: none !important;
+  .menu ul {
+    gap: clamp(2rem, 4vw, 3rem) !important;
+    margin: 0.2rem clamp(60px, 8vw, 80px) 0 0 !important;
   }
-    flex: 1 1 200px;
-    min-width: 160px;
-    max-width: 100%;
+
+  .menu li a {
+    font-size: clamp(1.1rem, 2.8vw, 1.2rem) !important;
   }
-  /* Mostrar botón hamburguesa también en tablets */
-  .hamburger { display: inline-flex; align-items: center; justify-content: center; }
 }
 
-/* Móvil: el header hace wrap y el buscador ocupa una fila completa debajo */
-@media (max-width: 768px) {
-  .header { grid-template-columns: auto 1fr auto; }
-  .hamburger { display: inline-flex; align-items: center; justify-content: center; }
-  /* Ocultar buscador del header en móvil para usar el buscador-movil dentro del contenido */
+@media (min-width: 1400px) and (max-width: 1599px) {
+  /* Desktop grande: más espacio disponible */
   #header-search,
-  .padre { display: none; }
+  .padre {
+    max-width: clamp(350px, 28vw, 400px) !important;
+  }
+
+  .menu ul {
+    gap: clamp(2.5rem, 5vw, 3.5rem) !important;
+    margin: 0.2rem clamp(80px, 10vw, 100px) 0 0 !important;
+  }
+
+  .menu li a {
+    font-size: clamp(1.2rem, 3vw, 1.3rem) !important;
+  }
 }
 
-/* Forzar colapso cuando no hay espacio suficiente */
-.header.collapse .hamburger { display: inline-flex; align-items: center; justify-content: center; }
-.header.collapse .menu { display: none; }
+@media (min-width: 1600px) {
+  /* Pantallas muy grandes: máximo aprovechamiento */
+  #header-search,
+  .padre {
+    max-width: clamp(400px, 30vw, 500px) !important;
+  }
+
+  .menu ul {
+    gap: clamp(3rem, 6vw, 4rem) !important;
+    margin: 0.2rem clamp(100px, 12vw, 120px) 0 0 !important;
+  }
+
+  .menu li a {
+    font-size: clamp(1.3rem, 3.2vw, 1.4rem) !important;
+  }
+}
+
+/* 📱 TABLETS PEQUEÑAS: Sistema especial anti-choque */
+@media (min-width: 800px) and (max-width: 899px) {
+  /* Reducir menú significativamente en tablets pequeñas */
+  .menu ul {
+    gap: 1rem !important;
+    margin: 0.2rem 40px 0 0 !important;
+  }
+
+  .menu li a {
+    font-size: 1rem !important;
+    padding: 0.5rem 0.75rem !important;
+  }
+
+  /* Buscador más pequeño para dar espacio al menú */
+  #header-search,
+  .padre {
+    max-width: 180px !important;
+    min-width: 150px !important;
+  }
+
+  /* Separación para hamburguesa en tablets pequeñas */
+  .hamburger {
+    margin-left: 1rem !important; /* Espacio desde el buscador */
+  }
+}
+
+/* 🖥️ Desktop muy grande: aún más separación */
+@media (min-width: 1400px) {
+  .header {
+    column-gap: clamp(3rem, 6vw, 5rem) !important; /* Más espacio en pantallas grandes */
+  }
+}
+
+/* 🚨 RESPALDO: Si aún hay choque, forzar reducción máxima */
+@media (max-width: 1023px) {
+  /* Tablets pequeñas: reducir todo al máximo */
+  .menu ul {
+    gap: 0.75rem !important;
+    margin: 0.2rem 20px 0 0 !important;
+  }
+
+  .menu li a {
+    font-size: 0.9rem !important;
+    padding: 0.4rem 0.6rem !important;
+    white-space: nowrap !important;
+  }
+
+  #header-search,
+  .padre {
+    max-width: 160px !important;
+    min-width: 120px !important;
+  }
+}
+
+/* 🎯 REGLA DE EMERGENCIA: Ocultar menú si no hay espacio absoluto */
+@media (max-width: 767px) {
+  /* Móviles: menú siempre oculto, solo hamburguesa */
+  .menu {
+    display: none !important;
+  }
+
+  .hamburger {
+    display: inline-flex !important;
+  }
+}
+
+
+/* Móvil: layout optimizado para mostrar logo, buscador y hamburguesa */
+@media (max-width: 768px) {
+  .header {
+    grid-template-columns: auto 1fr auto;
+    justify-items: start; /* Logo siempre a la izquierda */
+    column-gap: clamp(0.25rem, 1vw, 0.5rem); /* Separación reducida */
+  }
+  .hamburger {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 0.5rem; /* Espacio desde el logo/buscador */
+  }
+  /* Buscador del header VISIBLE en móviles */
+  #header-search,
+  .padre {
+    display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    max-width: 180px !important; /* Tamaño reducido para móviles */
+    min-width: 120px !important;
+  }
+
+  /* Logo perfectamente alineado a la izquierda en móviles */
+  .header > :first-child {
+    justify-self: start !important;
+    margin-left: 0;
+    padding-left: clamp(0.25rem, 1vw, 0.5rem); /* Espacio adaptativo */
+  }
+}
+
+/* 📱 Móviles: siempre mostrar hamburguesa y ocultar menú horizontal */
+@media (max-width: 799px) {
+  .hamburger {
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
+  }
+  .menu {
+    display: none !important;
+  }
+
+  /* Solo mostrar menú cuando esté abierto (drawer) */
+  .header .menu.open {
+    display: block !important;
+  }
+}
 /* El menú móvil se maneja desde Menu.css, no forzar display aquí */
 
 /* 🔍 Formulario de búsqueda */
@@ -83,7 +297,7 @@
   display: flex;
   align-items: center;
   padding: 6px 10px;
-  background: transparent;
+  background: rgba(255, 255, 255, 0.2);
   backdrop-filter: blur(10px);
   border-radius: 10px;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
@@ -98,12 +312,10 @@
   width: 36px;
   height: 36px;
   padding: 6px;
-  border: 1px solid rgba(255,255,255,0.2);
+  border: 1px solid rgba(255,255,255,0.3);
   border-radius: 8px;
-  background: transparent;
+  background: rgba(255,255,255,0.1);
   cursor: pointer;
-  -webkit-backdrop-filter: blur(8px);
-  backdrop-filter: blur(8px);
   color: #fff;
   display: inline-flex;
   align-items: center;
@@ -111,6 +323,25 @@
   justify-self: end; /* pega a la derecha en la grilla */
   margin-right: -0.5rem; /* empuja hacia la esquina */
 }
+
+/* 🔘 Botón del buscador - SIEMPRE VISIBLE cuando no hay colapso */
+.header:not(.collapse) .buscador-form button {
+  display: flex !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  min-width: 32px;
+  flex-shrink: 0;
+}
+
+/* 🔘 Botón del buscador - SIEMPRE VISIBLE incluso en colapso */
+.header.collapse .buscador-form button {
+  display: flex !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  min-width: 32px;
+  flex-shrink: 0;
+}
+
 
 /* 🧠 Input */
 .buscador-form input {
@@ -129,7 +360,7 @@
 
 /* 🔘 Botón */
 .buscador-form button {
-  background: transparent;
+  background: #5c9df1;
   border: none;
   padding: 6px 10px;
   border-radius: 8px;
@@ -138,7 +369,7 @@
   font-size: 0.9rem;
 }
 .buscador-form button:hover {
-  background: transparent;
+  background: #4285f4;
 }
 .buscador-form button:active {
   transform: scale(0.95);

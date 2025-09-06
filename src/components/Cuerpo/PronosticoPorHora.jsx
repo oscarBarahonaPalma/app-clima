@@ -32,46 +32,20 @@ export default function PronosticoPorHora({ hourly, weather }) {
   const weatherData = hourly || defaultHourly;
 
   const getWeatherIcon = (iconCode) => {
-    const isNight = iconCode && iconCode.includes('n');
-    
-    if (iconCode.includes('01')) {
-      return isNight ? <Sun className="icon-24 azul" /> : <Sun className="icon-24 amarillo" />;
-    }
-    if (iconCode.includes('02') || iconCode.includes('03') || iconCode.includes('04')) {
-      return <Cloud className="icon-24 gris" />;
-    }
-    if (iconCode.includes('09') || iconCode.includes('10')) {
-      return <CloudRain className="icon-24 gris" />;
-    }
-    return isNight ? <Sun className="icon-24 azul" /> : <Sun className="icon-24 amarillo" />;
+    if (iconCode.includes('01')) return <Sun className="icon-24 amarillo" />;
+    if (iconCode.includes('02') || iconCode.includes('03') || iconCode.includes('04')) return <Cloud className="icon-24 gris" />;
+    if (iconCode.includes('09') || iconCode.includes('10')) return <CloudRain className="icon-24 gris" />; // lluvia → gris
+    return <Sun className="icon-24 amarillo" />;
   };
 
   const mapIconToCond = (iconCode = '') => {
-    const isNight = iconCode && iconCode.includes('n');
-    
-    if (iconCode.includes('01')) {
-      return isNight ? 'clear-night' : 'sunny';
-    }
-    if (iconCode.includes('02') || iconCode.includes('03') || iconCode.includes('04')) {
-      return isNight ? 'cloudy-night' : 'cloudy';
-    }
-    if (iconCode.includes('09') || iconCode.includes('10')) {
-      return isNight ? 'rainy-night' : 'rainy';
-    }
-    if (iconCode.includes('11')) {
-      return isNight ? 'stormy-night' : 'stormy';
-    }
-    return isNight ? 'clear-night' : 'sunny';
+    if (iconCode.includes('01')) return 'sunny';
+    if (iconCode.includes('02') || iconCode.includes('03') || iconCode.includes('04')) return 'cloudy';
+    if (iconCode.includes('09') || iconCode.includes('10')) return 'rainy';
+    if (iconCode.includes('11')) return 'stormy';
+    return 'sunny';
   };
 
-  const getContainerCondition = () => {
-    const main = weather?.weather?.[0]?.main?.toLowerCase() || '';
-    if (main.includes('rain') || main.includes('drizzle')) return 'rainy';
-    if (main.includes('thunder')) return 'stormy';
-    if (main.includes('cloud')) return 'cloudy';
-    if (main.includes('clear')) return 'sunny';
-    return '';
-  };
 
   const buildTitulo = () => {
     return 'Pronóstico por hora';
@@ -79,27 +53,17 @@ export default function PronosticoPorHora({ hourly, weather }) {
 
   const getWeatherType = () => {
     const main = weather?.weather?.[0]?.main?.toLowerCase() || '';
-    const icon = weather?.weather?.[0]?.icon || '';
-    const isNight = icon && icon.includes('n');
-    
     if (main.includes('rain') || main.includes('drizzle')) return 'Lluvia';
     if (main.includes('thunder')) return 'Tormenta';
     if (main.includes('cloud')) return 'Nublado';
-    if (main.includes('clear')) {
-      return isNight ? 'Despejado' : 'Soleado';
-    }
+    if (main.includes('clear')) return 'Soleado';
     return '';
   };
 
   if (!weatherData || weatherData.length === 0) return null;
 
-  const containerCond = getContainerCondition();
-
   return (
-    <div className={`por-hora relative-box ${containerCond}`}>
-      <div className="bg-grad-1"></div>
-      <div className="bg-grad-2"></div>
-
+    <div className="por-hora relative-box">
       <div className="contenido-superpuesto">
         <h3 className="H3 animate-fade-in">{buildTitulo()}</h3>
         {getWeatherType() && (

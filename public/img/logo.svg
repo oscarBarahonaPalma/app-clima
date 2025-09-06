@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-labelledby="title desc">
+  <title>Logo App de Clima — Nube con Sol</title>
+  <desc>Icono minimalista de nube blanca con sol amarillo parcialmente visible.</desc>
+  <defs>
+    <linearGradient id="cloud" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="100%" stop-color="#d9f0ff"/>
+    </linearGradient>
+    <radialGradient id="sun" cx="0.5" cy="0.45" r="0.7">
+      <stop offset="0%" stop-color="#FFD34D"/>
+      <stop offset="100%" stop-color="#FFB300"/>
+    </radialGradient>
+  </defs>
+
+  <!-- Sun -->
+  <circle cx="88" cy="44" r="22" fill="url(#sun)"/>
+
+  <!-- Cloud -->
+  <g fill="url(#cloud)">
+    <rect x="28" y="60" width="72" height="26" rx="13" ry="13"/>
+    <circle cx="42" cy="64" r="16"/>
+    <circle cx="62" cy="56" r="22"/>
+    <circle cx="86" cy="64" r="18"/>
+  </g>
+</svg>

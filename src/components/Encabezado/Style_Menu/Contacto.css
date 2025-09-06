@@ -1,163 +1,203 @@
-.contenido{
-    
+.contacto-container {
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
- 
 }
 
 /* Estructura y texto principal */
-.contenido{
+.contacto-container {
     gap: 1.25rem;
     min-height: calc(100vh - 160px);
     padding: 2rem 1rem;
     color: #f5f7fb;
 }
 
-.contenido h2{
+.contacto-titulo {
     margin: 0;
-    font-size: clamp(1.4rem, 2.2vw, 1.8rem);
-    font-weight: 800;
-    letter-spacing: 0.3px;
+    font-size: clamp(1.6rem, 2.5vw, 2.2rem);
+    font-weight: 700;
+    letter-spacing: -0.025em;
     color: #ffffff;
+    text-align: center;
+    line-height: 1.2;
+    margin-bottom: 0.5rem;
 }
 
-.contenido p{
-    margin-top: 0.35rem;
-    margin-bottom: 0.5rem;
-    color: #007bff;
-    font-size: clamp(0.95rem, 1.6vw, 1.05rem);
-    font-weight: 700;
-    line-height: 1.55;
+.contacto-descripcion {
+    margin-top: 0.5rem;
+    margin-bottom: 1rem;
+    color: #cbd5e1;
+    font-size: clamp(1rem, 1.8vw, 1.15rem);
+    font-weight: 400;
+    line-height: 1.6;
+    text-align: center;
+    max-width: 600px;
+    opacity: 0.9;
 }
 
 /* Tarjeta del formulario */
-.contenido form{
+.contacto-container form {
     width: 100%;
-    background: #212121;
-    border: 1px solid #2b2b2b;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 16px;
-    padding: 1.25rem 1.25rem;
-    color: #000000;
-    box-shadow: 0 8px 24px rgba(0,0,0,0.25);
+    padding: 1.5rem;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    margin-top: 1rem;
 }
 
-/* Texto negro dentro de la tarjeta */
-.contenido form label{
-    color: #ffffff;
-}
-
-.contenido label{
-    color: #dfe7ff;
-    font-weight: 600;
+/* Labels del formulario */
+.contacto-container label {
+    color: #e2e8f0;
+    font-weight: 500;
     font-size: 0.95rem;
-    margin-bottom: 0.35rem;
+    margin-bottom: 0.5rem;
+    letter-spacing: 0.025em;
 }
 
-/* Campos */
-.contenido form input,
-.contenido form textarea{
+/* Campos del formulario */
+.contacto-container input,
+.contacto-container textarea {
     width: 100%;
-    color: #000000;
-    background: #ffffff;
-    border: 1px solid #d0d0d0;
-    border-radius: 10px;
-    padding: 0.75rem 0.9rem;
+    color: #1f2937;
+    background: rgba(255, 255, 255, 0.95);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 12px;
+    padding: 0.875rem 1rem;
     outline: none;
-    transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+    font-size: 0.95rem;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
 }
 
-.contenido form input::placeholder,
-.contenido form textarea::placeholder{
-    color: #666666;
+.contacto-container input::placeholder,
+.contacto-container textarea::placeholder {
+    color: #6b7280;
+    opacity: 0.8;
 }
 
-.contenido form input:focus,
-.contenido form textarea:focus{
-    border-color: #007bff;
-    box-shadow: 0 0 0 3px rgba(0,123,255,0.25);
-    background: #ffffff;
+.contacto-container input:focus,
+.contacto-container textarea:focus {
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+    background: rgba(255, 255, 255, 0.98);
+    transform: translateY(-1px);
 }
 
-.contenido textarea{
+.contacto-container textarea {
     resize: vertical;
-    min-height: 130px;
+    min-height: 140px;
+    line-height: 1.6;
 }
 
-/* Mensajes */
-.contenido span{
+/* Mensajes de error y éxito */
+.contacto-container span {
     display: block;
-    font-weight: 600;
+    font-weight: 500;
+    font-size: 0.9rem;
+    padding: 0.75rem;
+    border-radius: 8px;
+    margin-top: 1rem;
+    text-align: center;
 }
 
-/* Botón */
-.contenido button{
+/* Botón de envío */
+.contacto-container button {
     appearance: none;
     border: none;
     border-radius: 12px;
-    padding: 0.85rem 1rem;
-    font-weight: 700;
-    color: #0b1b33;
-    background: linear-gradient(135deg, #6ec1ff 0%, #007bff 100%);
+    padding: 1rem 2rem;
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: #ffffff;
+    background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
     cursor: pointer;
-    transition: transform 0.06s ease, filter 0.2s ease, box-shadow 0.2s ease;
-    box-shadow: 0 8px 20px rgba(0,123,255,0.35);
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 16px rgba(59, 130, 246, 0.3);
+    letter-spacing: 0.025em;
+    margin-top: 1.5rem;
+    width: 100%;
+    backdrop-filter: blur(10px);
 }
 
-.contenido button:hover{
-    filter: brightness(1.05);
+.contacto-container button:hover {
+    background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(59, 130, 246, 0.4);
 }
 
-.contenido button:active{
-    transform: translateY(1px);
+.contacto-container button:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 8px rgba(59, 130, 246, 0.3);
 }
 
-.contenido button:disabled{
+.contacto-container button:disabled {
     cursor: not-allowed;
-    opacity: 0.7;
-    box-shadow: none;
-    filter: saturate(0.8);
+    opacity: 0.6;
+    background: linear-gradient(135deg, #9ca3af 0%, #6b7280 100%);
+    transform: none;
+    box-shadow: 0 2px 8px rgba(156, 163, 175, 0.2);
 }
 
 /* Responsive */
-@media (max-width: 480px){
-    .contenido{
+@media (max-width: 480px) {
+    .contacto-container {
         padding: 1.25rem 1rem;
     }
-    .contenido form{
-        padding: 1rem;
+
+    .contacto-container form {
+        padding: 1.25rem;
         border-radius: 14px;
+        max-width: 95vw; /* Más ancho en móviles */
+    }
+
+    .contacto-titulo {
+        font-size: clamp(1.4rem, 2.2vw, 1.8rem);
+    }
+
+    .contacto-descripcion {
+        font-size: clamp(0.95rem, 1.6vw, 1.05rem);
     }
 }
 
-/* Desktop: ampliar el ancho máximo del formulario */
-@media (min-width: 1281px){
-    .contenido{
+/* Desktop: layout mejorado */
+@media (min-width: 1281px) {
+    .contacto-container {
         display: grid;
-        grid-template-columns: minmax(420px, 1fr) minmax(420px, 1fr);
+        grid-template-columns: minmax(450px, 1fr) minmax(400px, 1fr);
         gap: 3rem;
         align-items: start;
+        max-width: 1200px;
+        margin: 0 auto;
     }
+
     /* Formulario a la izquierda */
-    .contenido form{
-        max-width: 720px !important;
+    .contacto-container form {
+        max-width: 100%;
         grid-column: 1;
-        grid-row: 1 / span 2;
+        grid-row: 1;
         justify-self: start;
     }
+
     /* Título y descripción a la derecha */
-    .contenido h2{
+    .contacto-titulo {
         grid-column: 2;
         grid-row: 1;
-        text-align: center;
-        justify-self: center;
+        text-align: left;
+        justify-self: start;
+        align-self: start;
+        margin-top: 0;
     }
-    .contenido p{
+
+    .contacto-descripcion {
         grid-column: 2;
-        grid-row: 2;
-        text-align: center;
-        justify-self: center;
-        margin-top: 0.5rem;
+        grid-row: 1;
+        text-align: left;
+        justify-self: start;
+        align-self: start;
+        margin-top: 4rem;
     }
 }

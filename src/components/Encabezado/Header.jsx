@@ -23,7 +23,7 @@ function Header() {
     const computeCollapse = () => {
       const width = window.innerWidth;
       const overflow = el.scrollWidth > el.clientWidth + 2;
-      const shouldCollapse = width <= 1280 || overflow;
+      const shouldCollapse = width < 900 || overflow;
       setCollapse(shouldCollapse);
       if (!shouldCollapse) setMenuOpen(false);
     };

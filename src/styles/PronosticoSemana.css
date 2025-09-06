@@ -2,60 +2,129 @@
 .semana {
   display: flex;
   flex-wrap: wrap;
+  gap: clamp(0.5rem, 2vw, 1rem); /* Separación entre tarjetas */
+  justify-content: center;
+  padding: clamp(0.5rem, 2vw, 1rem);
 }
 
 .dia {
   display: flex;
+  flex-direction: column; /* Cambiar a columna para mejor control */
   align-items: center;
-  padding: 18px;
+  padding: clamp(12px, 3vw, 18px);
   background: rgba(255, 255, 255, 0.1);
   border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 10px;
-  margin: 10px;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-radius: clamp(8px, 2vw, 12px);
+  margin: 0; /* Removemos el margin ya que usamos gap */
+  flex: 1 1 calc(50% - 1rem); /* Dos columnas en móviles */
+  min-width: clamp(160px, 20vw, 200px); /* Más flexible */
+  max-width: clamp(250px, 25vw, 300px); /* Más flexible */
+  min-height: clamp(120px, 15vh, 160px); /* Altura mínima */
+  box-sizing: border-box;
+  overflow: hidden; /* Control de overflow */
+  text-align: center; /* Centrar todo el contenido */
 }
 
 .info-fecha {
   display: flex;
   flex-direction: column;
-  margin-right: 10px;
+  align-items: center;
+  margin-bottom: clamp(8px, 2vw, 12px);
+  width: 100%;
 }
 
 .nombre-dia {
   font-weight: 600;
-  font-size: 14px;
+  font-size: clamp(12px, 2.5vw, 16px);
+  line-height: 1.2;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  max-width: 100%;
 }
 
 .fecha {
-  font-size: 12px;
+  font-size: clamp(10px, 2vw, 14px);
   opacity: 0.7;
+  line-height: 1.2;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
 }
 
-.icono {
-  font-size: 32px;
-  margin: 0 15px;
+/* 📱 Responsive para diferentes tamaños */
+@media (max-width: 767px) {
+  .semana {
+    gap: clamp(0.3rem, 1.5vw, 0.8rem);
+    padding: clamp(0.3rem, 1.5vw, 0.8rem);
+  }
+
+  .dia {
+    flex: 1 1 100%; /* Una columna en móviles muy pequeños */
+    min-width: clamp(160px, 25vw, 200px);
+    max-width: none;
+    min-height: clamp(140px, 18vh, 180px);
+    padding: clamp(10px, 2.5vw, 16px);
+  }
+
+  .icono {
+    font-size: clamp(20px, 5vw, 28px);
+  }
+
+  .temp {
+    font-size: clamp(12px, 3vw, 16px);
+  }
 }
 
-.temp {
-  font-weight: 700;
-  font-size: 16px;
-  margin: 0 10px;
+@media (min-width: 768px) and (max-width: 1023px) {
+  .dia {
+    flex: 1 1 calc(50% - 0.5rem); /* Dos columnas en tablets */
+    min-height: clamp(130px, 16vh, 170px);
+    padding: clamp(12px, 3vw, 18px);
+  }
+
+  .icono {
+    font-size: clamp(22px, 5.5vw, 30px);
+  }
+
+  .temp {
+    font-size: clamp(13px, 3.2vw, 17px);
+  }
 }
+
+@media (min-width: 1024px) {
+  /* Estas reglas se sobrescriben por el grid layout más específico abajo */
+  .icono {
+    font-size: clamp(20px, 4vw, 28px); /* Más pequeño para caber en línea */
+  }
+
+  .temp {
+    font-size: clamp(12px, 2.5vw, 16px); /* Más pequeño para caber en línea */
+  }
+}
+
 
 .lluvia {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 0 10px;
+  margin: clamp(2px, 0.5vw, 4px) 0;
+  width: 100%;
 }
 
 .prob-lluvia {
   font-weight: 600;
-  color: #3b82f6;
+  font-size: clamp(11px, 2.5vw, 14px);
+  color: white;
+  line-height: 1.2;
 }
 
 .mm-lluvia {
-  font-size: 11px;
+  font-size: clamp(9px, 2vw, 12px);
   opacity: 0.6;
+  line-height: 1.2;
 }
 
 .viento {
@@ -66,7 +135,7 @@
 .titulo-semana-abajo {
   width: 100%;
   text-align: center;
-  font-size: 18px;
+  font-size: clamp(16px, 3vw, 20px);
   font-weight: 600;
   color: rgba(255, 255, 255, 0.95);
   margin-top: 8px;
@@ -80,19 +149,27 @@
   align-items: center;
 }
 
-/* 🖥️ Pantallas grandes - Layout en bloques de 2 */
+/* 🖥️ Pantallas grandes - Layout en UNA SOLA LÍNEA */
 @media (min-width: 1024px) {
   .semana {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(7, 1fr); /* 7 columnas para los 7 días */
     gap: 1rem;
-    max-width: 800px;
+    width: 100%;
+    max-width: 1200px; /* Mismo ancho que la gráfica y pronóstico por hora */
     margin: 0 auto;
+    justify-items: center;
+    align-items: center;
+    place-items: center;
   }
-  
+
   .dia {
     width: 100%;
-    margin: 0;
+    max-width: 160px;
+    min-height: 130px;
+    margin: 0 auto;
+    justify-self: center;
+    align-self: center;
   }
 }
 
@@ -102,22 +179,42 @@
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 1rem;
-    max-width: 800px;
+    max-width: 600px; /* Más compacto para alinearse mejor */
     margin: 0 auto;
+    width: 100%;
+    justify-items: center;
+    align-items: center;
   }
 
   .dia {
     width: 100%;
-    margin: 0; /* evita márgenes irregulares en grid */
+    margin: 0 auto;
+    justify-self: center;
+    align-self: center;
   }
 }
 
 /* Centrado del título dentro del grid */
 @media (min-width: 1024px) {
   .semana .titulo-semana-abajo {
-    grid-column: 1 / -1;
+    grid-column: 1 / -1; /* Ocupa todas las 7 columnas */
     justify-self: center;
     align-self: center;
     text-align: center;
+    margin-bottom: 1rem;
+    width: 100%;
+    place-self: center;
+  }
+}
+
+/* Centrado del título en tablet */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .semana .titulo-semana-abajo {
+    grid-column: 1 / -1; /* Ocupa las 2 columnas */
+    justify-self: center;
+    align-self: center;
+    text-align: center;
+    margin-bottom: 1rem;
+    place-self: center;
   }
 }

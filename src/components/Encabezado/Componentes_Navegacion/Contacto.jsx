@@ -84,11 +84,13 @@ export default function Contacto() {
   }
 
   return (
-    <div className="contenido" style={{ padding: '2rem' }}>
-      <h2>Contacto 📬</h2>
-      <p>¡Envíanos un mensaje si necesitas ayuda o solo quieres saludar! 😄</p>
+    <div className="contacto-container">
+      <h2 className="contacto-titulo">Contacto</h2>
+      <p className="contacto-descripcion">
+        Estamos aquí para ayudarte. Si tienes alguna pregunta, sugerencia o simplemente quieres ponerte en contacto con nosotros, no dudes en escribirnos.
+      </p>
 
-      <form onSubmit={handleSubmit} style={{ marginTop: '1rem', display: 'flex', flexDirection: 'column', maxWidth: '380px' }}>
+      <form onSubmit={handleSubmit} style={{ marginTop: '1rem', display: 'flex', flexDirection: 'column', maxWidth: '650px' }}>
         <label htmlFor="nombre">Nombre:</label>
         <input
           id="nombre"
