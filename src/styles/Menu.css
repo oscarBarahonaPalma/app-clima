@@ -109,7 +109,7 @@
     width: 300px !important;
     height: 100vh !important;
     display: none !important;
-    background: transparent !important;
+    background: #1a365d !important;
     z-index: 999 !important; /* Muy alto para estar por encima de todo */
     overflow-y: hidden !important;
     -webkit-overflow-scrolling: touch !important;
