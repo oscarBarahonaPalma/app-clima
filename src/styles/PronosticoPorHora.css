@@ -373,6 +373,7 @@
 .boton-derecha:hover { background: rgba(135, 206, 250, 0.3); transform: translateY(-50%) scale(1.1); }
 .chevron-20 { width: 20px; height: 20px; }
 
+
 /* ✅ Mobile tweaks */
 @media (max-width: 480px) {
   .H3 {
@@ -389,6 +390,7 @@
   .boton-derecha {
     padding: 0.5rem;
   }
+
 }
 
 /* 📱 Pantallas pequeñas - Pronóstico por hora más ancho */

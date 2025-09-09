@@ -4,7 +4,7 @@
   top: 0;
   z-index: 200; /* por encima del drawer */
   display: grid;
-  grid-template-columns: auto 1fr auto; /* logo | search | menu */
+  grid-template-columns: auto 2fr auto; /* logo | search más ancho | menu */
   place-items: center;
   column-gap: clamp(1.5rem, 4vw, 3rem); /* separación amplia entre elementos */
   align-items: center;
@@ -17,6 +17,7 @@
   background: #1a365d;
   border-bottom: none;
   justify-items: start; /* Asegurar que el logo esté alineado a la izquierda */
+  overflow: visible; /* Permitir que los elementos no se corten */
 }
 
 /* Asegurar que el logo esté siempre pegado al principio */
@@ -34,8 +35,8 @@
 .padre {
   display: flex;
   align-items: center;
-  min-width: 200px;
-  max-width: clamp(180px, 30vw, 400px);
+  min-width: 250px; /* ANCHO MÍNIMO AUMENTADO */
+  max-width: clamp(220px, 40vw, 500px); /* ANCHO MÁXIMO AUMENTADO */
   margin: 0; /* usaremos column-gap del grid para separar */
   height: 100%;
   margin-right: 0.5rem; /* Espacio adicional desde el siguiente elemento */
@@ -45,7 +46,7 @@
 @media (min-width: 768px) and (max-width: 899px) {
   #header-search,
   .padre {
-    max-width: 200px;
+    max-width: 280px; /* ANCHO AUMENTADO */
   }
 }
 
@@ -53,7 +54,7 @@
 @media (min-width: 900px) and (max-width: 1099px) {
   #header-search,
   .padre {
-    max-width: 280px;
+    max-width: 350px; /* ANCHO AUMENTADO */
   }
 }
 
@@ -61,7 +62,7 @@
 @media (min-width: 1100px) and (max-width: 1199px) {
   #header-search,
   .padre {
-    max-width: 320px;
+    max-width: 400px; /* ANCHO AUMENTADO */
   }
 }
 
@@ -69,7 +70,7 @@
 @media (min-width: 1200px) and (max-width: 1399px) {
   #header-search,
   .padre {
-    max-width: 400px;
+    max-width: 500px; /* ANCHO AUMENTADO */
   }
 }
 
@@ -77,7 +78,7 @@
 @media (min-width: 1400px) {
   #header-search,
   .padre {
-    max-width: 500px;
+    max-width: 600px; /* ANCHO AUMENTADO */
   }
 }
 
@@ -198,6 +199,7 @@
   /* Separación para hamburguesa en tablets pequeñas */
   .hamburger {
     margin-left: 1rem !important; /* Espacio desde el buscador */
+    margin-right: 1rem !important; /* ESPACIO DE SEPARACIÓN del borde derecho */
   }
 }
 
@@ -245,15 +247,19 @@
 /* Móvil: layout optimizado para mostrar logo, buscador y hamburguesa */
 @media (max-width: 768px) {
   .header {
-    grid-template-columns: auto 1fr auto;
+    grid-template-columns: auto minmax(120px, 2fr) auto; /* ESPACIO AÚN MÁS AMPLIADO para buscador */
     justify-items: start; /* Logo siempre a la izquierda */
-    column-gap: clamp(0.25rem, 1vw, 0.5rem); /* Separación reducida */
+    column-gap: clamp(1.5rem, 4vw, 2rem); /* Separación moderada para móviles */
   }
   .hamburger {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    margin-left: 0.5rem; /* Espacio desde el logo/buscador */
+    margin-left: 1rem; /* ESPACIO AMPLIADO para móviles */
+    margin-right: 1rem; /* ESPACIO DE SEPARACIÓN del borde derecho */
+    justify-self: end; /* Asegurar que esté a la derecha */
+    position: relative;
+    z-index: 50; /* PRIORIDAD MÁXIMA encima de todo */
   }
   /* Buscador del header VISIBLE en móviles */
   #header-search,
@@ -261,8 +267,17 @@
     display: flex !important;
     visibility: visible !important;
     opacity: 1 !important;
-    max-width: 180px !important; /* Tamaño reducido para móviles */
-    min-width: 120px !important;
+    max-width: 180px !important; /* ANCHO AÚN MÁS AMPLIADO para móviles */
+    min-width: 120px !important; /* MÍNIMO AUMENTADO */
+    position: relative;
+    z-index: 1; /* Debajo de la hamburguesa */
+  }
+
+  /* ASEGURAR QUE EL BOTÓN DEL BUSCADOR ESTÉ DEBAJO DEL HAMBURGUESA */
+  #header-search .buscador-form button,
+  .padre .buscador-form button {
+    position: relative !important;
+    z-index: 1 !important; /* MISMO NIVEL QUE EL CONTENEDOR */
   }
 
   /* Logo perfectamente alineado a la izquierda en móviles */
@@ -312,16 +327,16 @@
   width: 36px;
   height: 36px;
   padding: 6px;
-  border: 1px solid rgba(255,255,255,0.3);
+  border: none; /* QUITAR BORDE PARA ELIMINAR EFECTO CRISTAL */
   border-radius: 8px;
-  background: rgba(255,255,255,0.1);
+  background: transparent; /* FONDO TRANSPARENTE PARA ELIMINAR EFECTO CRISTAL */
   cursor: pointer;
   color: #fff;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  justify-self: end; /* pega a la derecha en la grilla */
-  margin-right: -0.5rem; /* empuja hacia la esquina */
+  justify-self: end; /* posiciona a la derecha en la grilla */
+  margin-right: 1rem; /* ESPACIO DE SEPARACIÓN del borde derecho */
 }
 
 /* 🔘 Botón del buscador - SIEMPRE VISIBLE cuando no hay colapso */
@@ -383,13 +398,107 @@ body, header, #header-search, .buscador-form {
 
 /* 📱 Responsive para móviles */
 @media (max-width: 480px) {
+  .header {
+    grid-template-columns: auto minmax(110px, 1.2fr) auto; /* ESPACIO AJUSTADO PARA BOTÓN INTERNO */
+    column-gap: clamp(1.5rem, 4vw, 2rem); /* SEPARACIÓN AUMENTADA para evitar pegado */
+  }
+
   #header-search {
-    max-width: 100%;
-    margin: 0 0.5rem;
+    max-width: 140px; /* ANCHO AJUSTADO PARA BOTÓN INTERNO */
+    min-width: 100px; /* MÍNIMO AJUSTADO */
+    margin: 0 0.5rem; /* MARGEN AUMENTADO */
+    justify-self: center; /* Centrar el buscador en su columna */
+    position: relative;
+    z-index: 1; /* Debajo de la hamburguesa */
+  }
+
+  .hamburger {
+    margin-left: 1.25rem; /* ESPACIO AUMENTADO desde el buscador más ancho */
+    margin-right: 0.75rem; /* ESPACIO DE SEPARACIÓN del borde derecho */
+    justify-self: end; /* Asegurar que esté completamente a la derecha */
+    position: relative;
+    z-index: 60; /* PRIORIDAD MÁXIMA para móviles pequeños */
+    width: 32px !important;
+    height: 32px !important;
+  }
+
+  /* ASEGURAR QUE EL BOTÓN DEL BUSCADOR ESTÉ DEBAJO DEL HAMBURGUESA */
+  #header-search .buscador-form button,
+  .padre .buscador-form button {
+    position: relative !important;
+    z-index: 1 !important; /* MISMO NIVEL QUE EL CONTENEDOR */
   }
 
   .buscador-form button {
     font-size: 0.8rem;
     padding: 5px 8px;
+  }
+}
+
+/* 📱 Móviles muy pequeños: layout AMPLIADO para mejor usabilidad */
+@media (max-width: 360px) {
+  .header {
+    grid-template-columns: auto minmax(150px, 1.6fr) auto; /* ESPACIO UN POCO MÁS GRANDE */
+    column-gap: clamp(0.9rem, 2.2vw, 1.1rem); /* SEPARACIÓN OPTIMIZADA */
+  }
+
+  #header-search {
+    max-width: 170px; /* ANCHO UN POCO MÁS GRANDE */
+    min-width: 130px; /* MÍNIMO UN POCO MÁS GRANDE */
+    margin: 0 0.25rem; /* MARGEN AUMENTADO */
+    justify-self: center;
+    position: relative;
+    z-index: 1; /* SIEMPRE debajo de la hamburguesa */
+  }
+
+  .hamburger {
+    margin-left: 1.5rem; /* ESPACIO UN POCO MÁS GRANDE desde el buscador aún más grande */
+    margin-right: 0.75rem; /* ESPACIO DE SEPARACIÓN del borde derecho */
+    justify-self: end;
+    position: relative;
+    z-index: 100; /* PRIORIDAD ABSOLUTA máxima */
+    width: 28px !important;
+    height: 28px !important;
+  }
+
+  /* ASEGURAR QUE EL BOTÓN DEL BUSCADOR ESTÉ DEBAJO DEL HAMBURGUESA */
+  #header-search .buscador-form button,
+  .padre .buscador-form button {
+    position: relative !important;
+    z-index: 1 !important; /* MISMO NIVEL QUE EL CONTENEDOR */
+  }
+
+  /* REGLA DE EMERGENCIA: asegurando que el buscador NUNCA esté encima de la hamburguesa */
+  #header-search,
+  .padre {
+    position: relative !important;
+    z-index: 1 !important; /* SIEMPRE debajo de la hamburguesa */
+    overflow: visible !important;
+  }
+}
+
+/* 🚨 REGLA DE MÁXIMA PRIORIDAD: ESPACIO DEL BOTÓN HAMBURGUESA */
+.hamburger {
+  margin-right: 1rem !important; /* SIEMPRE separación del borde derecho */
+}
+
+/* 🚨 REGLA DE MÁXIMA PRIORIDAD: HAMBURGUESA SIEMPRE ENCIMA EN MÓVILES */
+@media (max-width: 768px) {
+  .hamburger {
+    position: relative !important;
+    z-index: 1000 !important; /* PRIORIDAD ABSOLUTA máxima */
+  }
+
+  #header-search,
+  .padre {
+    position: relative !important;
+    z-index: 1 !important; /* SIEMPRE debajo */
+  }
+
+  /* ASEGURAR QUE EL BOTÓN DEL BUSCADOR ESTÉ MUY POR DEBAJO */
+  #header-search .buscador-form button,
+  .padre .buscador-form button {
+    position: relative !important;
+    z-index: 0 !important; /* NIVEL MÍNIMO */
   }
 }

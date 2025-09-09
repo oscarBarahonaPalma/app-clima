@@ -42,25 +42,25 @@
 /* 🧠 Input */
 .buscador-form input {
   flex: 1 1 auto;
-  padding: 6px 8px;
+  padding: 6px 20px 6px 16px; /* ESPACIO SUFICIENTE PARA EL BOTÓN CON MARGEN */
   border: none;
   outline: none;
   background: transparent;
   font-size: 0.9rem;
-  color: #1e293b;
+  color: #dc2626; /* ROJO para el texto normal */
   font-family: 'Segoe UI', sans-serif;
   font-weight: 500;
   transition: color 0.2s ease;
 }
 .buscador-form input::placeholder {
-  color: #94a3b8;
+  color: #fca5a5; /* ROJO CLARO para el placeholder */
   font-weight: 400;
 }
 .buscador-form input:focus {
-  color: #0f172a;
+  color: #b91c1c; /* ROJO OSCURO para el focus */
 }
 .buscador-form input:focus::placeholder {
-  color: #cbd5e1;
+  color: #fecaca; /* ROJO MUY CLARO para el placeholder en focus */
 }
 
 /* 🔘 Botón */
@@ -76,6 +76,8 @@
   color: white;
   flex-shrink: 0;
   min-width: 32px;
+  width: 32px;
+  height: 32px;
   display: flex !important;
   align-items: center;
   justify-content: center;
@@ -110,9 +112,8 @@ body, .buscador-form { border: none !important; outline: none !important; }
     padding: 3px 4px;
   }
   .buscador-form button {
-    font-size: 0.75rem;
-    padding: 4px 8px;
-    min-width: 28px; /* AUMENTADO */
+    width: 32px;
+    height: 32px;
     display: flex !important;
     visibility: visible !important;
     opacity: 1 !important;
@@ -134,10 +135,13 @@ body, .buscador-form { border: none !important; outline: none !important; }
     padding: 12px 16px;
   }
   .buscador-form button {
-    font-size: 1.4rem;
-    padding: 14px 20px;
-    border-radius: 18px;
-    min-width: 56px;
+    width: 32px;
+    height: 32px;
+    display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    align-items: center;
+    justify-content: center;
   }
 }
 
@@ -177,12 +181,8 @@ body, .buscador-form { border: none !important; outline: none !important; }
   }
 
   .header .padre   .buscador-form button {
-    width: auto !important;
-    min-width: 44px !important; /* AJUSTADO PARA CONSISTENCIA */
-    height: 28px !important; /* ALTURA FIJA PARA BOTÓN */
-    padding: 6px 10px !important;
-    margin-left: 8px !important;
-    font-size: 1rem !important;
+    width: 32px !important;
+    height: 32px !important;
     display: inline-flex !important;
     align-items: center !important;
     justify-content: center !important;
@@ -209,33 +209,47 @@ body, .buscador-form { border: none !important; outline: none !important; }
   opacity: 1 !important;
 }
 
+/* 📱 Móviles generales - ICONO AL LADO DERECHO CON SEPARACIÓN */
+@media (max-width: 768px) {
+  .buscador-form button {
+ /* SEPARACIÓN DEL BUSCADOR */
+ /* PEQUEÑA SEPARACIÓN DEL BORDE */
+    position: relative !important; /* POSICIÓN NORMAL AL LADO */
+    z-index: 0 !important; /* ASEGURAR QUE ESTÉ DEBAJO DEL HAMBURGUESA */
+  }
+}
+
 /* 📱 Móviles muy pequeños */
 @media (max-width: 360px) {
   .padre {
     display: flex !important; /* Asegurar visibilidad */
     max-width: 100%;
-    padding: 0 0.25rem;
+    padding: 0 0.25rem; /* ESPACIO AMPLIADO */
   }
   .buscador-form {
-    height: 44px; /* ALTURA CONSISTENTE */
-    padding: 6px 8px;
-    border-radius: 12px;
-    min-width: 180px;
+    height: 44px !important; /* ALTURA UN POCO MÁS GRANDE */
+    padding: 7px 12px !important; /* PADDING UN POCO MÁS GRANDE */
+    border-radius: 14px !important; /* BORDES UN POCO MÁS GRANDES */
+    min-width: 165px !important; /* ANCHO UN POCO MÁS GRANDE */
   }
   .buscador-form input {
-    font-size: 0.8rem;
-    padding: 4px 6px;
+    font-size: 0.8rem !important; /* FUENTE UN POCO MÁS GRANDE */
+    padding: 5px 8px !important; /* PADDING UN POCO MÁS GRANDE */
+    width: 100% !important;
   }
   .buscador-form button {
-    font-size: 0.8rem;
-    padding: 6px 8px;
-    border-radius: 8px;
-    min-width: 32px; /* AUMENTADO para mejor visibilidad */
+    width: 24px !important; /* BOTÓN UN POCO MÁS GRANDE */
+    height: 24px !important;
+    padding: 4px 6px !important; /* PADDING UN POCO MÁS GRANDE */
+    font-size: 0.7rem !important;
     display: flex !important;
     visibility: visible !important;
     opacity: 1 !important;
-    align-items: center;
-    justify-content: center;
+ /* PEQUEÑA SEPARACIÓN DEL BUSCADOR */
+ /* SEPARACIÓN DEL BUSCADOR */
+    flex-shrink: 0 !important;
+    flex-grow: 0 !important;
+    border-radius: 6px !important; /* BORDES UN POCO MÁS GRANDES */
   }
 }
 
@@ -243,25 +257,32 @@ body, .buscador-form { border: none !important; outline: none !important; }
 @media (min-width: 361px) and (max-width: 480px) {
   .padre {
     max-width: 100%;
-    padding: 0 0.5rem;
+    padding: 0 0.5rem; /* ESPACIO AMPLIADO */
   }
   .buscador-form {
-    padding: 8px 10px;
-    border-radius: 14px;
-    min-width: 200px;
+    height: 44px !important; /* ALTURA NORMAL */
+    padding: 8px 10px !important; /* PADDING NORMAL */
+    border-radius: 14px !important;
+    min-width: 140px !important; /* ANCHO MÁS COMPACTO */
   }
   .buscador-form input {
-    font-size: 0.85rem;
-    padding: 6px 8px;
+    font-size: 0.8rem !important; /* FUENTE NORMAL */
+    padding: 4px 20px 4px 16px !important; /* ESPACIO PARA EL BOTÓN */
+    width: 100% !important;
   }
   .buscador-form button {
-    font-size: 0.85rem;
-    padding: 6px 8px;
-    border-radius: 8px;
-    min-width: 28px;
+    width: 24px !important; /* BOTÓN NORMAL */
+    height: 24px !important;
+    padding: 4px 6px !important; /* PADDING NORMAL */
+    font-size: 0.7rem !important;
     display: flex !important;
     visibility: visible !important;
     opacity: 1 !important;
+ /* PEQUEÑA SEPARACIÓN DEL BUSCADOR */
+ /* SEPARACIÓN DEL BUSCADOR */
+    flex-shrink: 0 !important;
+    flex-grow: 0 !important;
+    border-radius: 6px !important; /* BORDES NORMALES */
   }
 }
 
@@ -277,10 +298,8 @@ body, .buscador-form { border: none !important; outline: none !important; }
     padding: 5px 8px;
   }
   .buscador-form button {
-    font-size: 0.9rem;
-    padding: 6px 10px;
-    border-radius: 10px;
-    min-width: 32px;
+    width: 32px;
+    height: 32px;
     display: flex !important;
     visibility: visible !important;
     opacity: 1 !important;
@@ -300,15 +319,13 @@ body, .buscador-form { border: none !important; outline: none !important; }
     flex: 1 1 200px !important; /* Espacio garantizado para el input */
   }
   .buscador-form button {
+    width: 32px !important;
+    height: 32px !important;
     display: flex !important;
     visibility: visible !important;
     opacity: 1 !important;
-    min-width: 44px !important; /* Aumentado significativamente */
-    padding: 10px 14px !important; /* Más padding para mejor apariencia */
+    flex-shrink: 0 !important;
     border-radius: 12px !important;
-    font-size: 1rem !important;
-    flex-shrink: 0 !important; /* No se comprime */
-    margin-left: 8px !important; /* Separación del input */
   }
 }
 
@@ -324,10 +341,8 @@ body, .buscador-form { border: none !important; outline: none !important; }
     padding: 6px 10px;
   }
   .buscador-form button {
-    font-size: 1rem;
-    padding: 8px 14px;
-    border-radius: 12px;
-    min-width: 40px;
+    width: 32px;
+    height: 32px;
     display: flex !important;
     visibility: visible !important;
     opacity: 1 !important;
@@ -346,10 +361,8 @@ body, .buscador-form { border: none !important; outline: none !important; }
     padding: 8px 12px;
   }
   .buscador-form button {
-    font-size: 1.1rem;
-    padding: 10px 16px;
-    border-radius: 14px;
-    min-width: 44px;
+    width: 32px;
+    height: 32px;
     display: flex !important;
     visibility: visible !important;
     opacity: 1 !important;
@@ -368,12 +381,65 @@ body, .buscador-form { border: none !important; outline: none !important; }
     padding: 10px 14px;
   }
   .buscador-form button {
-    font-size: 1.2rem;
-    padding: 12px 18px;
-    border-radius: 16px;
-    min-width: 48px;
+    width: 32px;
+    height: 32px;
     display: flex !important;
     visibility: visible !important;
     opacity: 1 !important;
   }
 }
+
+/* 🚨 REGLA MÁXIMA PRIORIDAD: BOTÓN SIEMPRE VISIBLE EN MÓVILES */
+@media (max-width: 480px) {
+  .buscador-form button {
+    width: 24px !important; /* TAMAÑO NORMAL PARA AL LADO */
+    height: 24px !important;
+    padding: 4px 6px !important;
+    font-size: 0.7rem !important;
+    display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+ /* SEPARACIÓN DEL BUSCADOR */
+    flex-shrink: 0 !important;
+    flex-grow: 0 !important;
+    background: linear-gradient(135deg, #3b82f6, #1d4ed8) !important;
+    border: none !important;
+    border-radius: 6px !important; /* BORDES NORMALES */
+    cursor: pointer !important;
+    align-items: center !important;
+    justify-content: center !important;
+    z-index: 0 !important; /* ASEGURAR QUE ESTÉ DEBAJO DEL HAMBURGUESA */
+  }
+}
+
+/* REGLA PARA MÓVILES MUY PEQUEÑOS */
+@media (max-width: 360px) {
+  .buscador-form button {
+    width: 24px !important; /* TAMAÑO UN POCO MÁS GRANDE PARA MÓVILES MUY PEQUEÑOS */
+    height: 24px !important;
+    padding: 4px 6px !important;
+    font-size: 0.7rem !important;
+ /* SEPARACIÓN DEL BUSCADOR */
+    border-radius: 6px !important; /* BORDES LIGERAMENTE MÁS GRANDES */
+    z-index: 0 !important; /* ASEGURAR QUE ESTÉ DEBAJO DEL HAMBURGUESA */
+  }
+}
+
+/* 🚨 REGLA UNIVERSAL: ICONO DE LUPA EN LA PARTE FINAL DEL BUSCADOR */
+.buscador-form button {
+  margin-right: 16px;  /* ESPACIO DEL BORDE DERECHO */
+  margin-left: 4px;    /* PEQUEÑA SEPARACIÓN DEL INPUT */
+  position: relative;
+}
+
+/* 📱 MÓVILES SUPER PEQUEÑOS: ICONO MÁS A LA DERECHA Y MÁS GRANDE */
+@media (max-width: 360px) {
+  .buscador-form button {
+    margin-right: 6px;   /* AÚN MENOR ESPACIO PARA QUE ESTÉ MÁS A LA DERECHA */
+    margin-left: 4px;    /* MANTIENE LA SEPARACIÓN DEL INPUT */
+    width: 36px;         /* TAMAÑO MAYOR DEL BOTÓN */
+    height: 36px;        /* ALTURA MAYOR DEL BOTÓN */
+    font-size: 0.95rem;  /* TEXTO MÁS GRANDE EN EL BOTÓN */
+  }
+}
+

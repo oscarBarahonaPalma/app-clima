@@ -105,19 +105,6 @@ export default function PronosticoPorHora({ hourly, weather }) {
             })}
           </div>
 
-          <button
-            className={`boton-izquierda ${isHovered ? 'animate-bounce' : ''}`}
-            onClick={scrollIzquierda}
-          >
-            <ChevronLeft className="chevron-20" />
-          </button>
-
-          <button
-            className={`boton-derecha ${isHovered ? 'animate-bounce' : ''}`}
-            onClick={scrollDerecha}
-          >
-            <ChevronRight className="chevron-20" />
-          </button>
         </div>
       </div>
     </div>
